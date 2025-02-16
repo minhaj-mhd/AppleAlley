@@ -1,0 +1,22 @@
+{% load static%}
+
+<div class="profile-container col-4">
+    <div class="profile-card">
+        <img  class="profile-image" src={% static "images/profile.png" %} alt="John" style="width:90%">
+        <h1>{{customer.name}}</h1>
+        <h3 class="title">Email:</h3>
+        <h5>{{email}}</h5>
+
+        {% if customer.email_verified%}
+            <a style="background-color:green" class="btn">Email Verified</a>
+        {% else %}
+            <a href={% url "verify" %} style="background-color:green" class="btn">Verify Email</a>
+        {%endif%}
+        <h3 class="title">Phone:</h3>
+        <h5>{{customer.phone}}</h5>
+        <h3 class="title">Address:</h3>
+        <h6 style="max-width=60%"> {{customer.address}} </h6>
+        <a href={%url "address" procceed="false"%} class="btn">Edit Details</a>
+
+    </div>
+</div>

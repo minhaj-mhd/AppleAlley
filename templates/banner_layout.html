@@ -1,0 +1,19 @@
+{% load static %}
+{% load custom_tags %}
+
+<div class="banner">
+    {%getBanner as Banner%}
+
+    <div class="row">
+        <div class="col-4">
+            <img src={{Banner.product.image.url}}>
+        </div>
+        <div class="col-2">
+            <h1 class="banner-title">{{Banner.heading}}</h1>
+            <p>{{Banner.description}}.</p>
+            <a href={% url "productdetails" Banner.product.id%} class="btn">Buy Now &#8594;</a>
+        </div>
+        
+    </div>
+</div>
+

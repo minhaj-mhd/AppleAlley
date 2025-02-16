@@ -1,0 +1,19 @@
+{% extends "blank_layout.html" %}
+{%load static  %}
+{%load order_tags%}
+{% block content %}
+<div >
+<div style="display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  height: 40vh;">
+
+  <img src={% static "images/tick-mark.webp"%} style="width:100px"/>
+
+<div style="margin: 5px;"> Order Confirmed</div>
+
+<div><a href={% url "profile"%} class = "btn">see Orders</a></div>
+</div>
+</div>
+{%endblock content%}

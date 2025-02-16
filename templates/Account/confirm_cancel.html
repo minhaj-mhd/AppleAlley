@@ -1,0 +1,48 @@
+{% extends "blank_layout.html" %}
+{% load static%}
+{%load order_tags%}
+
+{% block header%}
+<link rel="stylesheet" href={%static "css/profile.css"%}>
+
+{% endblock header%}
+{% block content %}
+<div class="row">
+    <div class="order-container col-md-8">
+        <h2 class="order-title">Following items would be cancelled:</h2>
+
+            {%for item in obj%}
+                <div class="orders-card">
+                    <img src="{{item.product.image.url}}" style="width:60px" class"order-item" />
+                     <div class"order-item" > 
+                        <h4>{{item.product.brand}}{{item.product.title}}</h4>
+                        {% if items.status == 1 %}
+                            <h5 style="color:green">Order Confirmed</h5>
+                        {% elif items.status == 2 %}
+                            <h5 style="color:green">Order on the Way</h5>
+                        {% elif items.status == 3 %}
+                            <h5 style="color:green">Order Delivered</h5>
+                        {% elif items.status == 4 %}
+                            <h5 style="color:red">Order Cancelled</h5>
+                        {% endif %}
+
+                    </div>
+                    <div class"order-item"><div>{{items.date}}</div>
+                        <div>
+                            <h4> Quantity: {{item.quantity}}</h4>
+
+                        </div>
+                    </div>
+                    <div class"order-item">
+                        <h4>{%multiply item.product.price item.quantity%}</h4>
+
+                    </div>
+                </div>
+                {%endfor%}
+                
+                            <a href={%url "cancel" id%} class="cancel-btn"  style="background-color:red">Cancel Order</a>
+{% endblock content %}
+
+{% block extra_scripts%}
+
+{% endblock extra_scripts%}

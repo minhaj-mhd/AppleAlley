@@ -1,0 +1,41 @@
+{% load static %}
+<div class="small-container">
+    <div class="row row-2">
+        {% if brand%}
+        <h2> {{brand}}</brand>
+        {%else%}
+        <h2>All Products</h2>
+        {%endif%}
+        {% comment %} <select>
+            <option>Default Sort</option>
+            <option>Sort By Price</option>
+            <option>Sort By Popularity</option>
+            <option>Sort By Rating</option>
+            <option>Sort By Sale</option>
+        </select> {% endcomment %}
+    </div>
+    <div class="row">
+        {% for item in obj %}
+        <div class="col-4">
+            <a href={% url "productdetails" item.id%}><img src={{item.image.url}}/></a>
+            <h4>{{item.title}}</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <p>${{item.price}}</p>
+        </div>
+        {% endfor%}
+        
+    </div>
+    <div class="page-btn">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>→</span>
+    </div>
+</div>

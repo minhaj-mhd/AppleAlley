@@ -1,0 +1,80 @@
+    {% load static %}
+ {% load custom_tags %}
+    <!-- Feadtued Categories -->
+
+    <div class="categories">
+        <div class="small-container">
+            <h2 class="title">Shop by Series</h2>
+
+            <div class="row">
+                <div class="col-5" >
+                    <a href={% url "productbybrand" "Samsung" %}>
+                    <img src={% static "images/series/16.png" %} width="200px" >
+                </a>
+                </div>
+                <div class="col-5">
+                    <a href={% url "productbybrand" "Apple" %}>
+
+                    <img src={% static "images/series/15.png"%}></a>
+                </div>
+                <div class="col-5">
+                    <a href={% url "productbybrand" "Google" %}>
+
+                    <img src={% static "images/series/14.png"%}></a>
+                </div>
+                <div class="col-5">
+                    <a href={% url "productbybrand" "Vivo" %}>
+
+                    <img src={% static "images/series/13.png"%}></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Products -->
+
+    <div class="small-container">
+        <h2 class="title">Featured Products</h2>
+        <div class="row">
+            {% get_featured_products 4 as featured_products%}
+            {% for product in featured_products%}
+            <div class="col-4">
+                <a href={% url "productdetails" product.id%}><img src= {{product.image.url}}></a>
+                <h4>{{product.brand}} {{product.title}}</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>{{product.price}}</p>
+            </div>
+            {%endfor%}
+
+            
+        </div>
+        <h2 class="title">Latest Products</h2>
+        <div class="row">
+            {%get_latest_products 4 as latest_products%}
+            {% for product in latest_products%}
+            <div class="col-4"  >
+                <a href={% url "productdetails" product.id%}><img src= {{product.image.url}}></a>
+                <h4>{{product.brand}} {{product.title}}</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>${{product.price}}</p>
+            </div>
+            {%endfor%}
+            
+        </div>
+    </div>
+
+
+
+

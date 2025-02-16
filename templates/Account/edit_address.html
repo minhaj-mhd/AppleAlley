@@ -1,0 +1,25 @@
+{% load static%}
+
+<div class="address-container" >
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="address-card">
+            <div class="profile-side">
+                <img class="profile-image" src="{% static 'images/profile.png' %}" alt="John">
+                <h1>{{ customer.name }}</h1>
+                <h3 class="title">Email:</h3>
+                <h5>{{ email }}</h5>
+                <h3 class="title">Phone:</h3>
+                <input type="text" style="width:60%" placeholder="{{ customer.phone }}" name="phone">
+                <input type="hidden" name="procceed" value="{{ procceed }}">
+            </div>
+            <div class="address-side">
+                <h3 class="title">Address:</h3>
+
+                {{ form.as_p }}
+                <button type="submit" class="btn">Update</button>
+            </div>
+        </div>
+    </form>
+</div>

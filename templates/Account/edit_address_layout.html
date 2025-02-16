@@ -1,0 +1,14 @@
+{% extends "blank_layout.html" %}
+{% load static%}
+
+{% block header%}
+<link rel="stylesheet" href={%static "css/profile.css"%}>
+
+{% endblock header%}
+{% block content %}
+{% include "Account/edit_address.html" %}
+{% endblock content %}
+
+{% block extra_scripts%}
+
+{% endblock extra_scripts%}

@@ -1,0 +1,65 @@
+{% load static  %}
+{%load order_tags%}
+<div class="small-container cart-page">
+    {%if cart.cart.all %}
+    <table>
+        <tbody><tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+        {%for obj in cart.cart.all%}
+        <tr>
+            <td>
+                <div class="cart-info">
+                    <img src={{obj.product.image.url}}>
+                    <div>
+                        <p>{{obj.product.title}}</p>
+                        <small>{{obj.product.price}}</small>
+                        <br>
+                        <form method="POST" action ={% url "removeproduct"%} enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type = "hidden" name="product_id" value={{obj.product.id}}>
+                            <input type = "hidden" name="obj_id" value={{obj.id}}>
+                            <button type="submit" class="btn">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+            <td><input type="text" value="{{obj.quantity}}" readonly></td>
+            <td id="" value="">{%multiply obj.product.price obj.quantity%}</td>
+        </tr>
+        {%endfor%}
+  
+    </tbody></table>
+    <div class="total-price">
+        <table>
+            <tbody><tr>
+                <td>Subtotal</td>
+                <td>{%getSubTotal cart as Subtotal%}{{Subtotal}}</td>
+            </tr>
+            <tr>
+                <td>Tax</td>
+                <td>{%tax Subtotal as tax%}{{tax}}</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>{%getTotal Subtotal tax as total%}{{total}}</td>
+            </tr>
+        </tbody></table>
+        
+    </div>
+    <form method="POST" action ={% url "confirmorder"%} enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type = "hidden" name="cart" value={{cart}}>
+        <input type="hidden" name = "total" value = {{total}}>
+        {%if verified%}
+        <button type="submit" style="background-color: green; color: white;width:30%;float:right" class="btn ">Procceed</button>
+        {%else%}
+        <a href={% url "verify" %} style="background-color: green; color: white;width:30%;float:right" class="btn ">Verify to Procceed</a>
+        {%endif%}
+    </form> 
+    {%else%}
+    <div>Cart is empty</div>
+    {%endif%}
+</div>

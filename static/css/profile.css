@@ -1,0 +1,115 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start; /* Ensures content aligns to the top */
+}
+
+
+
+.orders-card {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 10px;
+  width: 100%;
+  padding: 10px; /* Adds space around the card contents */
+  border-bottom: 1px solid #ccc; /* Optional: Adds a separator between orders */
+}
+
+.profile-card {
+  /* Takes up 1/4th of the screen width */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px; /* Optional: Caps the max width */
+  text-align: center;
+  margin-left: 30px;
+  margin-bottom: 100px;
+  padding-bottom: 40px;
+  position: static;
+  margin-top: 10px;
+}
+
+.address-card {
+  text-align: center;
+  margin: 10px auto; /* Center the card horizontally */
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row; /* Horizontal layout by default */
+  max-width: 75%; /* Takes 3/4th of the screen width on desktop */
+}
+
+
+.profile-side, .address-side {
+  flex: 1; /* Allows each side to take equal space */
+}
+
+.title {
+  color: grey;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.profile-image {
+  width: 100px;
+}
+
+.order-container {
+  flex-grow: 1; /* Takes the remaining space (3/4ths of the screen) */
+  margin-left: 20px;
+  width: 70%; /* Use percentages for a responsive layout */
+  flex-direction: column;
+  padding: 30px;
+}
+
+.cancel-btn{
+  display: inline-block;
+  background: #ff523b;
+  color: white;
+  padding: 5px 10px;
+  margin: 10px 0;
+  border-radius: 150px;
+  transition: background 0.5s;
+}
+.cancel-btn:hover{
+  background: #563434;
+}
+
+.order-title {
+  color: grey;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.order-item{
+
+  text-align: left;
+}
+.product{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 700px) {
+  .order-container {
+    width: 100%; /* On smaller screens, make it full width */
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  
+  .address-card {
+    flex-direction: column; /* Stack vertically on mobile */
+    max-width: 90%; /* Adjust width for mobile */
+    padding: 20px;
+    margin: 20px auto; /* Center with smaller margin on mobile */
+  }
+
+  .profile-image {
+      width: 60%; /* Larger profile image on mobile */
+  }
+
+  .btn {
+      width: 80%; /* Full-width button on mobile */
+  }
+}

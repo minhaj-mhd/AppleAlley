@@ -1,0 +1,41 @@
+{% extends "blank_layout.html" %}
+{%load static  %}
+{%load order_tags%}
+{% block content %}
+
+<div class="small-container cart-page">
+    <table>
+        <tbody><tr>
+            <th>Contact Number</th>
+            <th>Address</th>
+            
+            <th>Amount Payable</th>
+        </tr>
+        <td>{{customer.phone}} </td>
+        {%if customer.address%}
+        <td>{{customer.address}} </td>
+        {%else%}
+        <td><a href={%url "address" procceed="true"%}>Add Address</a> </td>
+
+        {%endif%}
+        <td> {{total}}</td>
+    </tbody>
+</table>
+
+<div style="width: 100%; display: flex; justify-content: flex-end;">
+    {%if customer.address%}
+    <form method = "post" action ={% url "payment"%}>
+        {%csrf_token%}
+        <input type = "hidden" name="amount" value={{total}}/>
+        <button type="submit" class="btn" style="background-color:green">Procceed to payment</button>
+
+    </form>
+    {%else%}
+    <a href = {%url "address" procceed="true"%} class="btn" style="background-color:green">Add address to continue</a>
+    {%endif%}
+
+
+</div>
+</div>
+
+{% endblock content %}
