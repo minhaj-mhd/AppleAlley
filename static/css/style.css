@@ -386,7 +386,7 @@ th:last-child{
 /* Account page */
 .account-page{
     padding: 50px 0;
-    background: radial-gradient(#fff, #ffd6d6);
+    background: radial-gradient(#fff, #ffffff);
 }
 .form-container{
     background: #fff;
@@ -453,7 +453,7 @@ form a{
   .search-input {
     height: 30px;
     width: 100%;
-    border-color: #fddddd;
+    border-color: #ffffff;
     border-radius: 5px;
     border-width: 1px;
   }

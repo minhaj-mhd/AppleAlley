@@ -155,7 +155,14 @@ CACHES = {
     }
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv("APP_MAIL", default="1")
+EMAIL_HOST_PASSWORD = os.getenv("APP_KEY", default="1")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # settings.py
 RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID")

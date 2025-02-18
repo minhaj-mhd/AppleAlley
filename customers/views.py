@@ -26,8 +26,9 @@ def Account(request):
             user.save()
             customer = Customer.objects.create(name=username,user=user,phone=phone)
             customer.save()
-            message="successfully registered"  
-            messages.success(request,message)          
+            print("print attribute")
+            return redirect("verify_email")
+
         except Exception as e:
             error_message = "Duplicate User or Invalid Credentials"
             messages.error(request,error_message)
@@ -44,7 +45,6 @@ def Account(request):
                 login(request,user)
                 return redirect("index")
             success_message="login successful"
-            message.success(request,success_message)
             return render(request,"Account/account_layout.html",context)
 
         except Exception as e:
@@ -59,6 +59,10 @@ def Account(request):
 def Logout(request):
     logout(request)
     return render(request,"Account/account_layout.html")
+
+def verify_registration(request):
+    return render(request,"Account/email/verify_registration.html")
+
 
 def Profile(request):
     if request.user:        
@@ -108,7 +112,7 @@ def Verify(request):
             email=request.POST.get("email")
             otp = randint(100000, 999999)
 
-            send_mail('OTP-foneCom',f'Your otp is {otp}','fonecom@gmail.com',[email],fail_silently=False)
+            send_mail('AppleAlley - Email Verification',f'Your otp is {otp}','devswebcraft@gmail.com',[email],fail_silently=False)
             request.session['email_otp'] = otp
 
             return redirect("verifyotp")

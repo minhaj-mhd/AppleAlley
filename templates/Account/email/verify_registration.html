@@ -1,0 +1,34 @@
+{% extends "blank_layout.html" %}
+
+{% load static %}
+{% block content%}
+<div class="account-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+                <div class="form-container">
+                    {%if messages%}
+                        {%for message in messages%}
+                         <p>{{message}}</p>
+                         {% endfor %}
+                    {%endif%}
+                    
+                    <div class="form-btn">
+                        Verify Email
+                        <hr id="">
+                    </div>
+                    <form id="" action="#" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="otp" placeholder="Enter OTP">
+                        <button type="submit" name = "" class="btn">Submit</button>
+                        <a href={%url "reset"%}>Resend OTP</a>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content%}
