@@ -1,20 +1,34 @@
 {% extends "blank_layout.html" %}
 
 {% load static %}
-{% block header%}
-<link rel="stylesheet" href={%static "css/profile.css"%}>
+{% block content%}
+<div class="account-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+                <div class="form-container">
+                    {%if messages%}
+                        {%for message in messages%}
+                         <p>{{message}}</p>
+                         {% endfor %}
+                    {%endif%}
+                    
+                    <div class="form-btn">
+                        Reset Your Password
+                        <hr id="">
+                    </div>
+                    <form id="" action="verify" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="email" placeholder="Enter Mail Id">
+                        <button type="submit" name = "" class="btn">Send OTP</button>
+                    </form>
 
-{% endblock header%}
-{% block content %}
-<div class="row">
-    
-    <div class="order-container col-md-4">
-    <form method="POST" action="verify">
-        {%csrf_token%}
-        <input type="text" value={{email}} name="email" style="width:300px">
-        <button type="submit" class="btn" style="width:200px">GetOtp</button>
-    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
 </div>
-{%endblock%}
+{% endblock content%}
+

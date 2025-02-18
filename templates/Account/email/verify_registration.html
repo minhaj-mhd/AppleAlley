@@ -19,11 +19,11 @@
                         Verify Email
                         <hr id="">
                     </div>
-                    <form id="" action="#" method="POST">
+                    <form id="" action="verify_email" method="POST">
                         {% csrf_token %}
                         <input type="text" name="otp" placeholder="Enter OTP">
                         <button type="submit" name = "" class="btn">Submit</button>
-                        <a href={%url "reset"%}>Resend OTP</a>
+                        <a href={%url "verify_email"%}>Resend OTP</a>
                     </form>
 
                 </div>

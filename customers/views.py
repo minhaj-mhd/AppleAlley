@@ -26,7 +26,8 @@ def Account(request):
             user.save()
             customer = Customer.objects.create(name=username,user=user,phone=phone)
             customer.save()
-            print("print attribute")
+            request.session["email"] = email
+
             return redirect("verify_email")
 
         except Exception as e:
@@ -61,8 +62,36 @@ def Logout(request):
     return render(request,"Account/account_layout.html")
 
 def verify_registration(request):
-    return render(request,"Account/email/verify_registration.html")
+    if request.method == "POST":
+        fetched_otp = request.POST.get("otp")
+        otp = request.session.get("otp")
+        if int(fetched_otp) == int(otp):
+            storage = messages.get_messages(request)
+            storage.used = True  # Mark all messages as used (cleared)
+            messages.success(request, "Email verified successfully!")
+            email = request.session.get("email")
+            user = User.objects.get(email=email)
+            if user:
+                customer = user.customer
+                customer.email_verified=True
+                customer.save()
+                login(request,user)
+                return redirect("index")
 
+        else:
+            messages.success(request,"Incorrect otp")
+    else:
+        email = request.session.get("email")
+        otp = send_otp(email)
+        request.session["otp"] = otp
+        return render(request,"Account/email/verify_registration.html")
+
+def send_otp(email):
+    otp = randint(100000, 999999)
+
+    send_mail('AppleAlley - Email Verification',f'Your otp is {otp}','devswebcraft@gmail.com',[email],fail_silently=False)
+
+    return (otp)
 
 def Profile(request):
     if request.user:        
@@ -106,24 +135,22 @@ def Address(request,procceed):
         return render(request,"Account/edit_address_layout.html",{"form":form,"customer":customer,"email":request.user.email,"procceed":procceed})
 
 def Verify(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
         if request.method=="POST":
             email=request.POST.get("email")
-            otp = randint(100000, 999999)
+            try:
+                user = User.objects.get(email=email)
+                otp = send_otp(email)
+                request.session['email_otp'] = otp
+                return redirect("verifyotp")
+            except:
+                messages.error(request,"Email Id doesn't exists.")
+                return redirect("verify")
 
-            send_mail('AppleAlley - Email Verification',f'Your otp is {otp}','devswebcraft@gmail.com',[email],fail_silently=False)
-            request.session['email_otp'] = otp
-
-            return redirect("verifyotp")
 
 
         else:
-            return render(request,"Account/email_verification_layout.html",{"email":request.user.email,"customer":customer}
-)
+            return redirect("reset")
 def VerifyOtp(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
         if request.method=="POST":
             otp=request.POST.get("otp")
             sessionOtp=request.session.get("email_otp")
@@ -131,32 +158,30 @@ def VerifyOtp(request):
                 storage = messages.get_messages(request)
                 storage.used = True  # Mark all messages as used (cleared)
                 messages.success(request, "Email verified successfully!")
-                customer.email_verified=True
-                customer.save()
-                return redirect('cart')
+                email = request.session.get("email")
+                user = User.objects.get(email=email)
+                login(request,user)
+                return redirect('index')
             else:
                 storage = messages.get_messages(request)
                 storage.used = True  # Mark all messages as used (cleared)
                 messages.error(request, "Invalid OTP")
-                return render(request,"Account/otp_verification_layout.html",{"email":request.user.email,"customer":customer})
-
+                return render(request,"Account/otp_verification_layout.html")
         else:
             storage = messages.get_messages(request)
             storage.used = True  # Mark all messages as used (cleared)
             messages.success(request, "Check your email for OTP")
-
-            return render(request,"Account/otp_verification_layout.html",{"email":request.user.email,"customer":customer}
-)
+            return render(request,"Account/otp_verification_layout.html")
 def ForgotPassword(request):
         if request.method=="POST":
-            email=request.POST.get("email")
             email = request.POST.get('email')
             try:
                 user = User.objects.get(email=email)
             except User.DoesNotExist:
                 messages.error(request, "User with this email does not exist.")
                 return redirect('reset')
-            request.session['otp_email'] = email
+            request.session['email'] = email
+            print("email session",request.session.get("email"))
             request.session['otp_expiry'] = (datetime.now() + timedelta(minutes=10)).isoformat()
 
             otp = randint(100000, 999999)
@@ -164,7 +189,7 @@ def ForgotPassword(request):
             send_mail('OTP-foneCom',f'Your otp is {otp}','fonecom@gmail.com',[email],fail_silently=False)
             request.session['email_otp'] = otp
 
-            return redirect("")
+            return redirect("verifyotp")
 
 
         else:
