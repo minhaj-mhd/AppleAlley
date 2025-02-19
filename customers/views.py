@@ -102,6 +102,7 @@ def Profile(request):
         for items in orders:
             order = items.cart.all()
             obj.append({"status":items.order_status,"orders":order,"date":items.created_at,"id":items.id})
+        print(customer.address)
         return render(request,"Account/Profile_layout.html",{"obj":obj,"customer":customer,"email" : user.email})
     else:
         return redirect("login")
@@ -132,6 +133,7 @@ def Address(request,procceed):
             form = AddressForm(instance=customer.address)
         else:
             form=AddressForm
+
         return render(request,"Account/edit_address_layout.html",{"form":form,"customer":customer,"email":request.user.email,"procceed":procceed})
 
 def Verify(request):

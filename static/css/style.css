@@ -201,8 +201,8 @@ small{
 }
 /* Footer */
 .footer{
-    background: black;
-    color: #8a8a8a;
+    background: #f3efef;
+    color: black;
     font-size: 14px;
     padding: 60px 0 20px;
 }
@@ -210,7 +210,7 @@ small{
     color: #8a8a8a;
 }
 .footer h3{
-    color: #fff;
+    color: #000000;
     margin-bottom: 20px;
 }
 .footer-col-1, .footer-col-2, .footer-col-3, .footer-col-4{
@@ -557,7 +557,6 @@ form a{
     padding: 0 20px;
     position: relative;
 }
-.address-form{}
 /* Media query for menu */
 @media only screen and (max-width: 800px){
     

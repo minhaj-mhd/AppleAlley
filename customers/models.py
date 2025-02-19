@@ -55,7 +55,7 @@ class Address(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.street_address}, {self.locality}, {self.city}, {self.state} - {self.pincode}'
+        return f"{self.street_address}\n{self.locality}\n{self.city}, {self.state} - {self.pincode}"
 
 
     
