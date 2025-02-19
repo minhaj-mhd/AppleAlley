@@ -49,9 +49,6 @@
   margin-bottom: 10px;
 }
 
-.profile-image {
-  width: 100px;
-}
 
 .order-container {
   flex-grow: 1; /* Takes the remaining space (3/4ths of the screen) */
@@ -87,6 +84,60 @@
   display: flex;
   flex-direction: column;
   justify-content: left;
+}
+
+.title{
+  text-align: center;
+  margin: 0 auto 80px;
+  position: relative;
+  line-height: 60px;
+
+}
+.profile-title{
+  text-align: center;
+  margin: 0 auto 80px;
+  position: relative;
+  line-height: 40px;
+  background-color: #ffffff;
+  width: 30%;
+  font-weight: bold;
+  color: #087474;
+  align-items: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #ffffff;
+  width: 30%;
+  font-weight: bold;
+  color: #087474;
+}
+td{
+  text-align: center;
+}
+
+.verify-btn {
+  display: inline-block;
+  background-color: green;
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.verify-btn:hover {
+  background-color: darkgreen;
 }
 
 /* Media Queries for Responsive Design */

@@ -2,12 +2,12 @@ from queue import Full
 from random import randint
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, render,redirect
-from .models import Customer
+from customers.models import Customer
 from orders.models import Order,OrderItem
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from .forms import AddressForm
+from customers.forms import AddressForm
 from datetime import datetime, timedelta
 
 # Create your views here.
@@ -166,12 +166,12 @@ def VerifyOtp(request):
                 storage = messages.get_messages(request)
                 storage.used = True  # Mark all messages as used (cleared)
                 messages.error(request, "Invalid OTP")
-                return render(request,"Account/otp_verification_layout.html")
+                return render(request,"Account/email/otp_verification_layout.html")
         else:
             storage = messages.get_messages(request)
             storage.used = True  # Mark all messages as used (cleared)
             messages.success(request, "Check your email for OTP")
-            return render(request,"Account/otp_verification_layout.html")
+            return render(request,"Account/email/otp_verification_layout.html")
 def ForgotPassword(request):
         if request.method=="POST":
             email = request.POST.get('email')
@@ -186,12 +186,12 @@ def ForgotPassword(request):
 
             otp = randint(100000, 999999)
 
-            send_mail('OTP-foneCom',f'Your otp is {otp}','fonecom@gmail.com',[email],fail_silently=False)
+            send_mail('OTP-AppleAlley',f'Your otp is {otp}','devswebcraft@gmail.com',[email],fail_silently=False)
             request.session['email_otp'] = otp
 
             return redirect("verifyotp")
 
 
         else:
-            return render(request,"Account/reset_password.html"
+            return render(request,"Account/email/reset_password.html"
 )
