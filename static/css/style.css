@@ -542,16 +542,22 @@ form a{
     padding-bottom: 50px;
 }
 .profile-container span{
-    font-weight: bold;
+    font-weight:lighter;
+
     padding: 0 10px;
     color: #555;
     cursor: pointer;
     display: inline-block;
 }
+.profile-container p{
+    font-weight: bold;
+
+}
 .profile-container {
     padding: 0 20px;
     position: relative;
 }
+.address-form{}
 /* Media query for menu */
 @media only screen and (max-width: 800px){
     
