@@ -95,8 +95,9 @@
 }
 .profile-title{
   text-align: center;
-  margin: 20px auto 40px;
+  margin: 0 auto 20px;
   position: relative;
+  line-height: 20px;
   background-color: #ffffff;
   width: 30%;
   font-weight: bold;
@@ -122,7 +123,7 @@ th {
   color: #087474;
 }
 td{
-  text-align: left;
+  text-align: center;
 }
 
 .verify-btn {
