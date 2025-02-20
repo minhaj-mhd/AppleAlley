@@ -62,16 +62,18 @@ class Address(models.Model):
 class Customer(models.Model):
     LIVE = 1
     DELETE = 0
-    DELETE_CHOICES = ((LIVE,"Live"),(DELETE,"Delete"))
+    DELETE_CHOICES = ((LIVE, "Live"), (DELETE, "Delete"))
+    first_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100, blank=True, null=True)
     name = models.CharField(max_length=200)
-    address = models.OneToOneField(Address,null=True,on_delete=models.SET_NULL, related_name="customer")
-    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name="customer")
+    address = models.OneToOneField(Address, null=True, on_delete=models.SET_NULL, related_name="customer")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="customer")
     email_verified = models.BooleanField(default=False)
     phone = models.IntegerField()
-    deleted_status = models.IntegerField(choices=DELETE_CHOICES,default=0 )
+    deleted_status = models.IntegerField(choices=DELETE_CHOICES, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self) -> str:
-        return self.name
+        return f"{self.first_name} {self.last_name}" if self.first_name and self.last_name else self.name
 

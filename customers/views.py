@@ -7,7 +7,7 @@ from orders.models import Order,OrderItem
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from customers.forms import AddressForm
+from customers.forms import AddressForm, CustomerForm
 from datetime import datetime, timedelta
 
 # Create your views here.
@@ -19,6 +19,9 @@ def Account(request):
             username= request.POST.get("username")
             email=request.POST.get("email")
             phone = request.POST.get("phone")
+            # Validate phone number
+            if not phone.isdigit() or len(phone) != 10:
+                raise ValueError("Invalid phone number")
             password= request.POST.get("password")
             user = User.objects.create_user(username=username,
                                         email=email,
@@ -30,10 +33,13 @@ def Account(request):
 
             return redirect("verify_email")
 
+        except ValueError as e:
+            messages.error(request, str(e))
+            return render(request, "Account/account_layout.html", context)
         except Exception as e:
             error_message = "Duplicate User or Invalid Credentials"
-            messages.error(request,error_message)
-        return render(request,"Account/account_layout.html",context)
+            messages.error(request, error_message)
+        return render(request, "Account/account_layout.html", context)
 
     elif request.POST and "login" in request.POST:
         context["register"] = False
@@ -94,47 +100,47 @@ def send_otp(email):
     return (otp)
 
 def Profile(request):
-    if request.user:        
+    if request.user:
         user = request.user
-        customer=user.customer
-        orders=Order.objects.filter(owner=customer).order_by('-created_at')
-        obj=[]
+        customer = user.customer
+        orders = Order.objects.filter(owner=customer).order_by('-created_at')
+        obj = []
         for items in orders:
             order = items.cart.all()
-            obj.append({"status":items.order_status,"orders":order,"date":items.created_at,"id":items.id})
-        print(customer.address)
-        return render(request,"Account/Profile_layout.html",{"obj":obj,"customer":customer,"email" : user.email})
+            obj.append({"status": items.order_status, "orders": order, "date": items.created_at, "id": items.id})
+        return render(request, "Account/Profile_layout.html", {"obj": obj, "customer": customer, "email": user.email})
     else:
         return redirect("login")
 
-def Address(request,procceed):
+def Address(request, procceed):
     user = request.user
 
     if user.is_authenticated:
         customer = user.customer
 
-        if request.method=="POST":
+        if request.method == "POST":
+            customer_form = CustomerForm(request.POST, instance=customer)
+            address_form = AddressForm(request.POST, instance=customer.address)
 
-            form = AddressForm(request.POST)
-            phone = request.POST.get("phone")
-            if phone:
-                customer.phone = phone
-                customer.save()
-            if form.is_valid():
-                address=form.save()
-                address.save()
-                customer.address = address
-                customer.save()
-                if procceed=='true':
+            if customer_form.is_valid() and address_form.is_valid():
+                customer_form.save()
+                address_form.save()
+                if procceed == 'true':
                     return redirect("confirmorder")
                 else:
                     return redirect("profile")
-        if customer.address:
-            form = AddressForm(instance=customer.address)
-        else:
-            form=AddressForm
 
-        return render(request,"Account/edit_address_layout.html",{"form":form,"customer":customer,"email":request.user.email,"procceed":procceed})
+        else:
+            customer_form = CustomerForm(instance=customer)
+            address_form = AddressForm(instance=customer.address)
+
+        return render(request, "Account/edit_address_layout.html", {
+            "customer_form": customer_form,
+            "address_form": address_form,
+            "customer": customer,
+            "email": request.user.email,
+            "procceed": procceed
+        })
 
 def Verify(request):
         if request.method=="POST":

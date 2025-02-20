@@ -10,19 +10,32 @@
     var LoginForm = document.getElementById("LoginForm");
     var RegForm = document.getElementById("RegForm");
     var Indicator = document.getElementById("Indicator");
+    
     function register() {
         RegForm.style.transform = "translatex(0px)";
         LoginForm.style.transform = "translatex(0px)";
         Indicator.style.transform = "translateX(100px)";
-
     }
+    
     function login() {
         RegForm.style.transform = "translatex(300px)";
         LoginForm.style.transform = "translatex(300px)";
         Indicator.style.transform = "translate(0px)";
-
     }
+
+    // Phone number validation
+    document.getElementById("RegForm").addEventListener('submit', function(e) {
+        const phoneInput = this.querySelector('input[name="phone"]');
+        const phoneNumber = phoneInput.value.replace(/\D/g, '');
+        
+        if (phoneNumber.length !== 10) {
+            e.preventDefault();
+            alert('Please enter exactly 10 digits for phone number');
+            return false;
+        }
+    });
 </script>
+
 {% if register%}
 <script>register()</script>
 {%else%}

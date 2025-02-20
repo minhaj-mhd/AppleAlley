@@ -1,46 +1,86 @@
 {% load static%}
 
-<div class="container" >
-    <div class = "title"><h3> Edit Profile </h3></div>
+<div class="container">
+    <div class="title"><h3>Edit Profile</h3></div>
 
     <form method="POST">
         {% csrf_token %}
 
         <div class="row">
-            <div class = "col">
-            <div class="profile-container address-form">
-                
-                <img  class="profile-image" src={% static "images/profile.png" %} alt="John" style="width:30%">
-                
-                <table>
-                    <tr>
-                        <th class="profile-title">UserName:</th>
-                        <td>{{ customer.name }}</td>
-                    </tr>
-                    <tr>
-                        <th class="profile-title">Email:</th>
-                        <td>{{ email }}</td>
-                    </tr>
-                    <tr>
-                        <th class="profile-title">Phone:</th>
-                        <td>                
-                            <input type="text" style="width:60%" placeholder="{{ customer.phone }}" name="phone">
-                        </td>
-                    </tr>
-                </table>
-                <input type="hidden" name="procceed" value="{{ procceed }}">
-
-            
+            <div class="col-1">
+                <div class="profile-container">
+                    <div class="profile-info">
+                        <span>First Name:</span>
+                        <div>
+                            <input type="text" name="first_name" value="{{ customer.first_name }}" style="width:60%">
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <span>Last Name:</span>
+                        <div>
+                            <input type="text" name="last_name" value="{{ customer.last_name }}" style="width:60%">
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <span>Email:</span>
+                        <div>{{ email }}</div>
+                    </div>
+                    <div class="profile-info">
+                        <span>Phone:</span>
+                        <div class="phone-input-container">
+                            <span class="country-code">+91</span>
+                            <input type="text" 
+                                   name="phone" 
+                                   value="{{ customer.phone }}" 
+                                   style="width:60%" 
+                                   maxlength="10" 
+                                   pattern="[0-9]{10}"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+                                   required>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="profile-container">
-                <h3 class="profile-title">Edit Address:</h3>
-
-                {{ form.as_p }}
-                <button type="submit" class="btn" style="width:150px">Update</button>
-            </div>
+            <div class="col-3">
+                <div class="profile-container">
+                    <h3 class="address-title">Edit Address:</h3>
+                    <div class="address-form">
+                        {{ address_form.as_p }}
+                    </div>
+                    <button type="submit" class="btn" style="width:150px">Update</button>
+                </div>
             </div>
         </div>
     </form>
 </div>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const phoneInput = this.querySelector('input[name="phone"]');
+        const phoneNumber = phoneInput.value.replace(/\D/g, '');
+        
+        if (phoneNumber.length !== 10) {
+            e.preventDefault();
+            alert('Please enter exactly 10 digits for phone number');
+            return false;
+        }
+    });
+
+    // Real-time validation
+    document.querySelector('input[name="phone"]').addEventListener('input', function(e) {
+        // Remove any non-numeric characters
+        this.value = this.value.replace(/\D/g, '');
+        
+        // Limit to 10 digits
+        if (this.value.length > 10) {
+            this.value = this.value.slice(0, 10);
+        }
+        
+        // Visual feedback
+        if (this.value.length === 10) {
+            this.style.borderColor = '#4CAF50';
+        } else {
+            this.style.borderColor = '#ccc';
+        }
+    });
+</script>

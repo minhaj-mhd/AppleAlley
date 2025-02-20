@@ -2,45 +2,41 @@
 
 <div class="">
     <div class="container ">
-        <div class = "title"><h3> Your Profile </h3></div>
+        <div class="title"><h3>Your Profile</h3></div>
         <div class="row">
             <div class="col-2">
-    <div class="profile-container">
-        
-        <table>
-            <tr>
-                <th class="profile-title">UserName:</th>
-                <td>{{ customer.name }}</td>
-            </tr>
-            <tr>
-                <th class="profile-title">Email:</th>
-                <td>{{ email }}</td>
-            </tr>
-            <tr>
-                <th class="profile-title">Phone:</th>
-                <td>{{ customer.phone }}</td>
-            </tr>
-            {% if not customer.email_verified %}
-            <tr>
-                <td colspan="2">
-                    <a href="{% url 'verify' %}" class="verify-btn">Verify Email</a>
-                </td>
-            </tr>
-            {% endif %}
-        </table>
-</div>
-</div>
-    <div class = "col-2">
-        <div class = "profile-container">
-        <h3 class="profile-title">Address:</h3>
-
-        <h4 > <p>{{ customer.address|linebreaksbr }}</p>
- </h4>
-        <a href={%url "address" procceed="false"%} class="btn">Edit Details</a>
-
+                <div class="profile-container">
+                    <div class="profile-info">
+                        <span>First Name:</span>
+                        <div>{{ customer.first_name }}</div>
+                    </div>
+                    <div class="profile-info">
+                        <span>Last Name:</span>
+                        <div>{{ customer.last_name }}</div>
+                    </div>
+                    <div class="profile-info">
+                        <span>Email:</span>
+                        <div>{{ email }}</div>
+                    </div>
+                    <div class="profile-info">
+                        <span>Phone:</span>
+                        <div>{{ customer.phone }}</div>
+                    </div>
+                    {% if not customer.email_verified %}
+                    <div class="profile-info">
+                        <a href="{% url 'verify' %}" class="verify-btn">Verify Email</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="profile-container">
+                    <h3 class="address-title">Address:</h3>
+                    <p class="address-text">{{ customer.address|linebreaksbr }}</p>
+                    <a href={% url "address" procceed="false" %} class="btn">Edit Details</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-    </div>
-</div>
-    </div>
 
