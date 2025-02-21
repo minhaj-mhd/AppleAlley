@@ -9,7 +9,21 @@ from products.models import Product
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-# Create your views here.
+
+def Orders(request):
+    user = request.user
+    if user:
+        customer=user.customer
+        orders = Order.objects.filter(owner=customer).order_by('-created_at')
+        obj = []
+        for items in orders:
+            order = items.cart.all()
+            obj.append({"status": items.order_status, "orders": order, "date": items.created_at, "id": items.id})
+        return render(request, "Account/Orders_layout.html", {"obj": obj, "customer": customer, "email": user.email})
+
+    return(render(request,"Account/Orders_layout.html"))
+
+
 def Cart(request):
     user = request.user
     if user:

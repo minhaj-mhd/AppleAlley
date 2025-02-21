@@ -62,6 +62,8 @@ p{
     line-height: 60px;
     margin: 25px 0;
 }
+
+
 .btn{
     display: inline-block;
     background: #087474;
@@ -491,6 +493,7 @@ form a{
   .search-result:hover {
     background-color: #f0f0f0;
   }
+
   
 #Indicator{
     width: 100px;
