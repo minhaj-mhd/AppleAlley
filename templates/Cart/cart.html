@@ -12,10 +12,10 @@
         <tr>
             <td>
                 <div class="cart-info">
-                    <img src={{obj.product.image.url}}>
+                    <img src={{obj.IPhoneVariant.image.url}}>
                     <div>
-                        <p>{{obj.product.title}}</p>
-                        <small>{{obj.product.price}}</small>
+                        <p>{{obj.IPhoneVariant}}</p>
+                        <small>{{obj.IPhoneVariant.price}}</small>
                         <br>
                         <form method="POST" action ={% url "removeproduct"%} enctype="multipart/form-data">
                             {% csrf_token %}
@@ -27,7 +27,7 @@
                 </div>
             </td>
             <td><input type="text" value="{{obj.quantity}}" readonly></td>
-            <td id="" value="">{%multiply obj.product.price obj.quantity%}</td>
+            <td id="" value="">{%multiply obj.IPhoneVariant.price obj.quantity%}</td>
         </tr>
         {%endfor%}
   

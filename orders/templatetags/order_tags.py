@@ -1,5 +1,5 @@
 from django import template
-from products.models import Product
+from products.models import IPhoneVariant
 from orders.models import Order,OrderItem
 # Register template library
 register = template.Library()
@@ -13,13 +13,13 @@ def multiply(a,b):
 def getSubTotal(cart):
     total=0
     for obj in cart.cart.all():
-        total = obj.product.price * obj.quantity+total
+        total = obj.IPhoneVariant.price * obj.quantity+total
     return total
 
 @register.simple_tag        
 def tax(subtotal):
-    return subtotal*.18
+    return int(subtotal)*.18
 
 @register.simple_tag        
 def getTotal(subTotal,tax):
-    return subTotal+tax
+    return float(subTotal)+float(tax)

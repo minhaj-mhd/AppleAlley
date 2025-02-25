@@ -5,7 +5,7 @@ from django.conf import settings
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from .models import Order,OrderItem
-from products.models import Product
+from products.models import Product,IPhoneVariant
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -14,12 +14,12 @@ def Orders(request):
     user = request.user
     if user:
         customer=user.customer
-        orders = Order.objects.filter(owner=customer).order_by('-created_at')
+        orders = Order.objects.filter(owner=customer).exclude(order_status=0).order_by('-created_at')
         obj = []
         for items in orders:
             order = items.cart.all()
             obj.append({"status": items.order_status, "orders": order, "date": items.created_at, "id": items.id})
-        return render(request, "Account/Orders_layout.html", {"obj": obj, "customer": customer, "email": user.email})
+        return render(request, "Account/Orders_layout.html", {"obj": obj})
 
     return(render(request,"Account/Orders_layout.html"))
 
@@ -30,9 +30,9 @@ def Cart(request):
         customer=user.customer
         cart_obj,create=Order.objects.get_or_create(owner=customer,
                                              order_status=Order.CART_STAGE)
+        print(customer.order)
         email_verified=customer.email_verified
         context={"cart":cart_obj,"verified":email_verified}
-        print(cart_obj.cart.all())
         return render(request,"Cart/cart_layout.html",context)
 
 
@@ -44,15 +44,17 @@ def AddToCart(request):
         if user.is_authenticated:
             print(user)
             customer = user.customer
-            product_id = request.POST.get("product_id")
+            IPhoneVariant_id = request.POST.get("product_id")
             quantity = int(request.POST.get("quantity"))
             cart_obj,created=Order.objects.get_or_create(
                 owner=customer,
                 order_status=Order.CART_STAGE
             )
             cart_obj.save()
+            print("varientId",IPhoneVariant_id)
+            Variant=IPhoneVariant.objects.get(id=IPhoneVariant_id)
             ordered_item,created = OrderItem.objects.get_or_create(
-            product=Product.objects.get(id=product_id),
+            IPhoneVariant=Variant,
             order=cart_obj
             )
             if created:
@@ -98,9 +100,9 @@ def confirmOrder(request):
         print(orders)
         total = 0
         for obj in orders:
-            product = obj.product
-            print(product.price)
-            total = total+int(product.price)*int(obj.quantity)
+            IPhoneVariant = obj.IPhoneVariant
+            print(IPhoneVariant.price)
+            total = total+int(IPhoneVariant.price)*int(obj.quantity)
 
         total=total+total*0.18
         context={

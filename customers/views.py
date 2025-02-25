@@ -45,14 +45,18 @@ def Account(request):
         context["register"] = False
 
         try:
-            username= request.POST.get("username")
+            email= request.POST.get("email")
             password= request.POST.get("password")
-            user = authenticate(request,username=username,password=password)
+            user = authenticate(request,email=email,password=password)
+            print(user)
             if user:
                 login(request,user)
+                success_message="login successful"
+                messages.success(request,success_message)
                 return redirect("index")
-            success_message="login successful"
-            return render(request,"Account/account_layout.html",context)
+            else:
+                raise Exception
+        
 
         except Exception as e:
             error_message = "Invalid Credentials"

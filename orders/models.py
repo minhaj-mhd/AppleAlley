@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from customers.models import Customer
-from products.models import Product
+from products.models import IPhoneVariant
 # Create your models here.
 class Order(models.Model):
     LIVE = 1
@@ -27,7 +27,7 @@ class Order(models.Model):
         return "order-"+self.owner.name+"  "+str(self.id)
 
 class OrderItem(models.Model):
-    product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="order_item")
+    IPhoneVariant = models.ForeignKey(IPhoneVariant,on_delete=models.CASCADE,related_name="order_item",null=True)
     quantity = models.IntegerField(default=1)
     order = models.ForeignKey(Order,on_delete=models.CASCADE,related_name='cart')
 

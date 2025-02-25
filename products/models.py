@@ -46,7 +46,7 @@ class IPhoneModel(models.Model):
 
 
     def __str__(self):
-        return f"{self.series.name} {self.name}"
+        return f" {self.name}"
 
 class StorageOption(models.Model):
     capacity = models.CharField(max_length=10, unique=True)
