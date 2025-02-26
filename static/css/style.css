@@ -872,3 +872,22 @@ form a{
         max-width: 150px;
     }
 }
+.discount-tag {
+    position: absolute;
+    bottom: 0px;
+    right: 20px;
+    transform: translate(-50%, -50%);
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 10;
+}
+.image-container {
+    position: relative;
+  }
+.banner-image{
+    object-fit: cover;
+
+  }

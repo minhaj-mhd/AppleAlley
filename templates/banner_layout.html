@@ -6,12 +6,18 @@
     <div class="container">
         <div class="row">
             <div class="col-4">
-                <img src={{Banner.image.url}} alt="Banner Image">
+                <div class="image-container">
+
+                <img class="banner-image" src={{Banner.image.url}} alt="Banner Image">
+                <div class="discount-tag">Rs. 80,000</div>
+                </div>
             </div>
             <div class="col-2">
                 <h2 class="banner-title">{{Banner.heading}}</h2>
                 <p>{{Banner.description}}.</p>
                 {% comment %} <a href={% url "productdetails" Banner.product.id%} class="btn">Buy Now &#8594;</a> {% endcomment %}
+                <button type="submit" class="btn">Get it Now</button>
+
             </div>
         </div>
     </div>
