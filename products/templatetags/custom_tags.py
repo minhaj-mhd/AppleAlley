@@ -12,5 +12,4 @@ def get_latest_products(count):
     return IPhoneVariant.objects.order_by("price")[:count]
 @register.simple_tag
 def getBanner():
-    return Banner.objects.get(id=1)
-    
+    return Banner.objects.all()

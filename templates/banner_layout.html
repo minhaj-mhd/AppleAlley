@@ -2,24 +2,38 @@
 {% load custom_tags %}
 
 <div class="banner">
-    {%getBanner as Banner%}
-    <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <div class="image-container">
-
-                <img class="banner-image" src={{Banner.image.url}} alt="Banner Image">
-                <div class="discount-tag">Rs. 80,000</div>
+    {% getBanner as Banners %}
+    <div class="banner-container">
+        <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for Banner in Banners %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="image-container">
+                                <img class="banner-image" src="{{ Banner.image.url }}" alt="Banner Image">
+                                <div class="discount-tag">Rs. 80,000/-</div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <h2 class="banner-title">{{ Banner.heading }}</h2>
+                            <p>{{ Banner.description }}</p>
+                            <button type="submit" class="btn">Get it Now</button>
+                        </div>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-            <div class="col-2">
-                <h2 class="banner-title">{{Banner.heading}}</h2>
-                <p>{{Banner.description}}.</p>
-                {% comment %} <a href={% url "productdetails" Banner.product.id%} class="btn">Buy Now &#8594;</a> {% endcomment %}
-                <button type="submit" class="btn">Get it Now</button>
 
-            </div>
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
         </div>
     </div>
 </div>
 
+<!-- Include Bootstrap JS (If not already included) -->

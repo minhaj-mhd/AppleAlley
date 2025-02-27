@@ -43,6 +43,13 @@ p{
     padding-left: 25px;
     padding-right: 25px;
 }
+.banner-container{
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    height: 80vh;
+}
 .row{
     display: flex;
     align-items: center;
@@ -583,6 +590,7 @@ form a{
         max-width: 600px;
         overflow: hidden;
         transition: max-height 0.5s;
+        z-index: 1;
     }
     nav ul li{
         display: block;
@@ -620,6 +628,13 @@ form a{
     }
     .cart-info p{
         display: none;
+    }
+    .banner-container{
+        max-width: 1300px;
+        margin: auto;
+        padding-left: 25px;
+        padding-right: 25px;
+        height: 90vh;
     }
 }
 
@@ -891,3 +906,25 @@ form a{
     object-fit: cover;
 
   }
+  .carousel-item {
+    display: none; /* Hide all items initially */
+}
+.carousel-item.active {
+    display: block; /* Show only the active one */
+}
+
+@media only screen and (max-width: 600px) {
+    .image-row {
+        display: flex;
+        flex-wrap: wrap; /* Allows items to wrap when necessary */
+        gap: 10px; /* Adds space between images */
+        justify-content: space-between; /* Distributes space evenly */
+    }
+    .image-item {
+        flex: 1 1 30%; /* Allows images to take up 30% of the container width */
+        max-width: 100%; /* Ensures images don't exceed 30% */
+        margin: 10px 0; /* Adds margin for spacing */
+
+    }
+   
+}

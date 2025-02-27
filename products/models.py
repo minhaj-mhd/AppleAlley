@@ -18,13 +18,7 @@ class Product(models.Model):
     def __str__(self) -> str:
         return self.brand + " " + self.title
     
-class Banner(models.Model):
-    image = models.ImageField(upload_to="media/",null=True)
-    heading = models.CharField(max_length=400)
-    description = models.CharField(max_length=600)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
-    
+
     
 
 class IPhoneSeries(models.Model):
@@ -76,3 +70,13 @@ class IPhoneVariant(models.Model):
 
     def __str__(self):
         return f"{self.model} - {self.storage} - {self.color}"
+class Banner(models.Model):
+    image = models.ImageField(upload_to="media/",null=True)
+    product = models.ForeignKey(IPhoneVariant,on_delete=models.DO_NOTHING,null=True)
+    heading = models.CharField(max_length=400)
+
+    description = models.CharField(max_length=600)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self) -> str:
+        return self.heading
