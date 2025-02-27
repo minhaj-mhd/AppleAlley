@@ -17,19 +17,7 @@ body{
 }
 
 
-nav{
-    flex: 1;
-    text-align: right;
-    position: relative;
-}
-nav ul{
-    display: inline-block;
-    list-style-type: none;
-}
-nav ul li{
-    display: inline-block;
-    margin-right: 20px;
-}
+
 a{
     text-decoration: none;
     color: #555;
@@ -64,12 +52,15 @@ p{
     max-width: 100%;
     padding: 50px 0;
 }
-.col-2 h1{
+/* .col-2 h1{
     font-size: 50px;
     line-height: 60px;
     margin: 25px 0;
-}
+} */
 
+.search-area{
+    margin-top: 15px;
+}
 
 .btn{
     display: inline-block;
@@ -303,9 +294,9 @@ select:focus{
 }
 
 /* Single Product */
-.single-product{
+/* .single-product{
     margin-top: 80px;
-}
+} */
 .single-product .col-2 img{
     padding: 0;
 }
@@ -441,7 +432,6 @@ form input{
     border: 1px solid #ccc;
 }
 form .btn{
-    width: 100%;
     border: none;
     cursor: pointer;
     margin: 10px 0;
@@ -575,68 +565,9 @@ form a{
     position: relative;
 }
 /* Media query for menu */
-@media only screen and (max-width: 800px){
-    
-    .search {
-        width: 80%;
-        margin: 10px auto; /* Center the search box */
-        position: relative;
-    }
-    nav ul{
-        position: absolute;
-        top: 70px;
-        left: 0;
-        background: #333;
-        max-width: 600px;
-        overflow: hidden;
-        transition: max-height 0.5s;
-        z-index: 1;
-    }
-    nav ul li{
-        display: block;
-        margin-right: 50px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-    nav ul li a{
-        color: white;
-    }
-    .menu-icon{
-        display: block;
-        cursor: pointer;
-    }
-}
+
 
 /* Media query for 600 screen size */
-@media only screen and (max-width: 600px){
-
-    .row{
-        text-align: center;
-    }
-    .col-2, .col-3, .col-4{
-        flex-basis: 100%;
-    }
-    .single-product .row{
-        text-align: left;
-    }
-    .single-product .col-2{
-        padding: 20px 0;
-    }
-    .single-product h1{
-        font-size: 26px;
-        line-height: 32px;
-    }
-    .cart-info p{
-        display: none;
-    }
-    .banner-container{
-        max-width: 1300px;
-        margin: auto;
-        padding-left: 25px;
-        padding-right: 25px;
-        height: 90vh;
-    }
-}
 
 /* Banner Section */
 .banner {
@@ -913,18 +844,3 @@ form a{
     display: block; /* Show only the active one */
 }
 
-@media only screen and (max-width: 600px) {
-    .image-row {
-        display: flex;
-        flex-wrap: wrap; /* Allows items to wrap when necessary */
-        gap: 10px; /* Adds space between images */
-        justify-content: space-between; /* Distributes space evenly */
-    }
-    .image-item {
-        flex: 1 1 30%; /* Allows images to take up 30% of the container width */
-        max-width: 100%; /* Ensures images don't exceed 30% */
-        margin: 10px 0; /* Adds margin for spacing */
-
-    }
-   
-}
