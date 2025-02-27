@@ -60,7 +60,7 @@
             {% for product in featured_products%}
             <div class="col-4">
                 <a href={% url "productdetails" product.id%}><img src= {{product.image.url}}></a>
-                <h4>{{product.brand}} {{product.title}}</h4>
+                <h4>{{product}}</h4>
                 <p style="text-decoration: line-through;">Rs.{{product.max_price}}
 
                 <p>{{product.price}}</p>

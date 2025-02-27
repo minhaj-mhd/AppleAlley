@@ -19,13 +19,8 @@
         <div class="col-4">
             <a href={% url "productdetails" item.id%}><img src={{item.image.url}} style="width:200px"/></a>
             <h4>{{item}}</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
+            <p style="text-decoration: line-through;">Rs.{{item.max_price}}
+
             <p>Rs.{{item.price}}</p>
         </div>
         {% endfor%}

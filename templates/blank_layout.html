@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fone Com | Mobile Ecommerce </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href={%static "css/style.css"%}>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -28,40 +29,49 @@
     {% endblock content%}
 
 
-    <!-- Footer -->
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col-1">
-                    {% comment %} <h3>Download Our App</h3>
-                    <p>Download App for Android and ios mobile phone.</p>
-                    <div class="app-logo">
-                        <img src={% static "images/play-store.png"%}>
-                        <img src={% static "images/app-store.png"%}>
-                    </div> {% endcomment %}
+   <!-- Footer -->
+<div class="footer bg-dark text-light py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Footer Column 1 (Download App - Commented) -->
+            <div class="col-md-3">
+                {% comment %} 
+                <h3>Download Our App</h3>
+                <p>Download App for Android and iOS mobile phones.</p>
+                <div class="app-logo">
+                    <img src="{% static 'images/play-store.png' %}" alt="Google Play Store" class="img-fluid mb-2">
+                    <img src="{% static 'images/app-store.png' %}" alt="App Store" class="img-fluid">
                 </div>
-                <div class="footer-col-2">
-                    <img src={% static "images/applealley.png"%}>
-                    <p>Our Purpose Is To Sustainably Make the Pleasure and Benefits of Technology Accessible to the Many.
-                    </p>
-                </div>
-                <div class="footer-col-3">
-                    
-                </div>
-                <div class="footer-col-4">
-                    <h5>Follow Us</h5>
-                    <ul>
-                        <li>Facebook</li>
-                        <li>Twitter</li>
-                        <li>Instagram</li>
-                        <li>Youtube</li>
-                    </ul>
-                </div>
+                {% endcomment %}
             </div>
-            <hr>
-            <p class="copyright">Copyright 2024 - Webcraft dev</p>
+
+            <!-- Footer Column 2 (Brand and Purpose) -->
+            <div class="col-md-3">
+                <img src="{% static 'images/applealley.png' %}" alt="Apple Alley" class="img-fluid mb-3">
+                <p>Our Purpose Is To Sustainably Make the Pleasure and Benefits of Technology Accessible to the Many.</p>
+            </div>
+
+            <!-- Footer Column 3 (Empty, you can add more content later) -->
+            <div class="col-md-3">
+                <!-- You can add more links or content here if needed -->
+            </div>
+
+            <!-- Footer Column 4 (Follow Us) -->
+            <div class="col-md-3">
+                <h5>Follow Us</h5>
+                <ul class="list-unstyled">
+                    <li><a href="https://www.facebook.com" target="_blank" class="text-light"><i class="fab fa-facebook-square"></i> Facebook</a></li>
+                    <li><a href="https://twitter.com" target="_blank" class="text-light"><i class="fab fa-twitter-square"></i> Twitter</a></li>
+                    <li><a href="https://www.instagram.com" target="_blank" class="text-light"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
         </div>
+
+        <!-- Footer Bottom (Copyright) -->
+        <hr class="border-light">
+        <p class="text-center mb-0">Copyright 2024 - Webcraft dev</p>
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -900,3 +900,16 @@ form a{
     font-size: 0.95rem;
     color: #555;
 }
+.footer {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #f8f9fa;
+}
+
+.footer a:hover {
+    color: #007bff;
+}
