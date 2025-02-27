@@ -1,42 +1,45 @@
-{% load static%}
+{% load static %}
 
-<div class="">
-    <div class="container ">
-        <div class="title"><h3>Your Profile</h3></div>
-        <div class="row">
-            <div class="col-2">
-                <div class="profile-container">
-                    <div class="profile-info">
-                        <span>First Name:</span>
-                        <div>{{ customer.first_name }}</div>
-                    </div>
-                    <div class="profile-info">
-                        <span>Last Name:</span>
-                        <div>{{ customer.last_name }}</div>
-                    </div>
-                    <div class="profile-info">
-                        <span>Email:</span>
-                        <div>{{ email }}</div>
-                    </div>
-                    <div class="profile-info">
-                        <span>Phone:</span>
-                        <div>{{ customer.phone }}</div>
-                    </div>
-                    {% if not customer.email_verified %}
-                    <div class="profile-info">
-                        <a href="{% url 'verify' %}" class="verify-btn">Verify Email</a>
-                    </div>
-                    {% endif %}
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h3 class="custom-heading">Profile</h3>
+        <div class="heading-underline"></div>
+    </div>
+    
+    <div class="row">
+        <!-- Profile Info (Left Side) -->
+        <div class="col-md-6 col-12 d-flex align-items-center justify-content-center mb-4 mb-md-0">
+            <div class="profile-box">
+                <h4 class="mb-3 text-center fw-bold border-bottom pb-2">👤 Profile Details</h4>
+                <div class="profile-info mb-2">
+                    <strong>First Name:</strong> <span class="text-muted">{{ customer.first_name }}</span>
                 </div>
+                <div class="profile-info mb-2">
+                    <strong>Last Name:</strong> <span class="text-muted">{{ customer.last_name }}</span>
+                </div>
+                <div class="profile-info mb-2">
+                    <strong>Email:</strong> <span class="text-muted">{{ email }}</span>
+                </div>
+                <div class="profile-info mb-2">
+                    <strong>Phone:</strong> <span class="text-muted">{{ customer.phone }}</span>
+                </div>
+                {% if not customer.email_verified %}
+                <div class="mt-3 text-center">
+                    <a href="{% url 'verify' %}" class="btn btn-warning btn-sm">Verify Email</a>
+                </div>
+                {% endif %}
             </div>
-            <div class="col-2">
-                <div class="profile-container">
-                    <h3 class="address-title">Address:</h3>
-                    <p class="address-text">{{ customer.address|linebreaksbr }}</p>
-                    <a href={% url "address" procceed="false" %} class="btn">Edit Details</a>
+        </div>
+
+        <!-- Address Section (Right Side) -->
+        <div class="col-md-6 col-12 d-flex align-items-center justify-content-center">
+            <div class="profile-box">
+                <h4 class="mb-3 text-center fw-bold border-bottom pb-2">📍 Address</h4>
+                <p class="text-muted text-center">{{ customer.address|linebreaksbr }}</p>
+                <div class="text-center">
+                    <a href="{% url 'address' procceed='false' %}" class="btn btn-primary btn-sm mt-2">Edit Details</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

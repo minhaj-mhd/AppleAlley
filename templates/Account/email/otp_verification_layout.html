@@ -23,8 +23,9 @@
                         {% csrf_token %}
                         <input type="text" name="otp" placeholder="Enter your OTP">
                         <button type="submit" name = "" class="btn">Verify</button>
-                    </form>
+                        <a href="{% url 'reset'%}" >Resend OTP</a>
 
+                    </form>
                 </div>
             </div>
         </div>

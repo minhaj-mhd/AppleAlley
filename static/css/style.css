@@ -36,7 +36,7 @@ p{
     margin: auto;
     padding-left: 25px;
     padding-right: 25px;
-    height: 80vh;
+    height: 50vh;
 }
 .row{
     display: flex;
@@ -121,6 +121,26 @@ p{
     line-height: 60px;
     color: #555;
 }
+.custom-heading {
+    font-weight: bold;
+    font-size: 1.8rem; /* Adjust as needed */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(to right, #087474, #055e5e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+}
+
+.heading-underline {
+    width: 120px;
+    height: 3px;
+    background-color: #087474;
+    border-radius: 2px;
+    margin: 6px auto 0; /* Centering */
+}
+
 .title::after{
     content: '';
     background: #087474;
@@ -844,3 +864,39 @@ form a{
     display: block; /* Show only the active one */
 }
 
+.order-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #087474;
+    text-transform: uppercase;
+    border-bottom: 3px solid #087474;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.order-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.order-image {
+    width: 70px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.badge {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+}
+.profile-info strong {
+    font-weight: 600;
+    color: #333;
+}
+
+.profile-info .text-muted {
+    font-size: 0.95rem;
+    color: #555;
+}

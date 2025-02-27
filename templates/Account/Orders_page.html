@@ -1,41 +1,53 @@
 {% load static %}
-{%load order_tags%}
+{% load order_tags %}
 
-<div class="row">
-    <div class="order-container col-md-8">
-        <h2 class="order-title">Your Orders:</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="order-title text-center mb-4">Your Orders</h2>
 
-        {% for items in obj%}
-                {%for item in items.orders%}
-                <div class="orders-card">
-                    <img src="{{item.IPhoneVariant.image.url}}" style="width:60px" class"order-item" />
-                     <div class"order-item" > 
-                        <h4>{{item.IPhoneVariant}}</h4>
-                        {% if items.status == 1 %}
-                            <h5 style="color:green">Order Confirmed</h5>
-                        {% elif items.status == 2 %}
-                            <h5 style="color:green">Order on the Way</h5>
-                        {% elif items.status == 3 %}
-                            <h5 style="color:green">Order Delivered</h5>
-                        {% elif items.status == 4 %}
-                            <h5 style="color:red">Order Cancelled</h5>
-                        {% endif %}
+            {% for items in obj %}
+                {% for item in items.orders %}
+                <div class="card order-card p-3 mb-3">
+                    <div class="row align-items-center">
+                        <!-- Product Image -->
+                        <div class="col-md-2 text-center">
+                            <img src="{{ item.IPhoneVariant.image.url }}" class="order-image img-fluid">
+                        </div>
 
-                    </div>
-                    <div class"order-item"><div>{{items.date}}</div>
-                        <div>
-                            <h4> Quantity: {{item.quantity}}</h4>
+                        <!-- Product Details -->
+                        <div class="col-md-4">
+                            <h5 class="fw-bold">{{ item.IPhoneVariant }}</h5>
+                            {% if items.status == 1 %}
+                                <span class="badge bg-success">Order Confirmed</span>
+                            {% elif items.status == 2 %}
+                                <span class="badge bg-primary">Order on the Way</span>
+                            {% elif items.status == 3 %}
+                                <span class="badge bg-success">Order Delivered</span>
+                            {% elif items.status == 4 %}
+                                <span class="badge bg-danger">Order Cancelled</span>
+                            {% endif %}
+                        </div>
 
+                        <!-- Order Date & Quantity -->
+                        <div class="col-md-3 text-center">
+                            <p class="text-muted mb-1"><i class="bi bi-calendar"></i> {{ items.date }}</p>
+                            <p class="fw-semibold">Quantity: {{ item.quantity }}</p>
+                        </div>
+
+                        <!-- Price & Cancel Button -->
+                        <div class="col-md-3 text-center">
+                            <h5 class="fw-bold text-success">₹{% multiply item.IPhoneVariant.price item.quantity %}</h5>
+                            {% if items.status != 4 %}
+                                <a href="{% url 'confirmcancel' items.id %}" class="btn btn-danger btn-sm mt-2">
+                                    Cancel Order
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class"order-item">
-                        <h4>{%multiply item.IPhoneVariant.price item.quantity%}</h4>
-                        {% if items.status != 4 %}
-                            <a href={%url "confirmcancel" items.id%} class="cancel-btn"  style="background-color:red">Cancel Order</a>
-                        {% endif %}
-                    </div>
                 </div>
-                {%endfor%}
-        {% endfor%}
+                {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </div>

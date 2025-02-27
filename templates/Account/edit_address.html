@@ -1,54 +1,52 @@
-{% load static%}
+{% load static %}
 
-<div class="container">
-    <div class="title"><h3>Edit Profile</h3></div>
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h3 class="custom-heading">Edit Profile</h3>
+        <div class="heading-underline"></div>
+    </div>
+    
+    
 
     <form method="POST">
         {% csrf_token %}
 
-        <div class="row">
-            <div class="col-1">
-                <div class="profile-container">
-                    <div class="profile-info">
-                        <span>First Name:</span>
-                        <div>
-                            <input type="text" name="first_name" value="{{ customer.first_name }}" style="width:60%">
-                        </div>
+        <div class="row justify-content-between">
+            <!-- Profile Edit (Left Side - Centered) -->
+            <div class="col-md-6 d-flex align-items-center justify-content-center" style="height: 60vh;">
+                <div>
+                    <h4 class="mb-3 text-center fw-bold border-bottom pb-2">👤 Profile Details</h4>
+                    <div class="profile-info mb-2">
+                        <strong>First Name:</strong>
+                        <input type="text" name="first_name" class="form-control d-inline-block w-50" value="{{ customer.first_name }}">
                     </div>
-                    <div class="profile-info">
-                        <span>Last Name:</span>
-                        <div>
-                            <input type="text" name="last_name" value="{{ customer.last_name }}" style="width:60%">
-                        </div>
+                    <div class="profile-info mb-2">
+                        <strong>Last Name:</strong>
+                        <input type="text" name="last_name" class="form-control d-inline-block w-50" value="{{ customer.last_name }}">
                     </div>
-                    <div class="profile-info">
-                        <span>Email:</span>
-                        <div>{{ email }}</div>
+                    <div class="profile-info mb-2">
+                        <strong>Email:</strong> <span class="text-muted">{{ email }}</span>
                     </div>
-                    <div class="profile-info">
-                        <span>Phone:</span>
-                        <div class="phone-input-container">
-                            <span class="country-code">+91</span>
-                            <input type="text" 
-                                   name="phone" 
-                                   value="{{ customer.phone }}" 
-                                   style="width:60%" 
-                                   maxlength="10" 
-                                   pattern="[0-9]{10}"
+                    <div class="profile-info mb-2">
+                        <strong>Phone:</strong>
+                        <div class="d-flex align-items-center">
+                            <span class="fw-bold me-2">+91</span>
+                            <input type="text" name="phone" class="form-control w-50"
+                                   value="{{ customer.phone }}" maxlength="10" pattern="[0-9]{10}"
                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
                                    required>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="profile-container">
-                    <h3 class="address-title">Edit Address:</h3>
-                    <div class="address-form">
-                        {{ address_form.as_p }}
-                    </div>
-                    <button type="submit" class="btn" style="width:150px">Update</button>
+
+            <!-- Address Edit (Right Side - Responsive Padding) -->
+            <div class="col-md-5 col-12 d-flex flex-column justify-content-start p-md-0 p-3">
+                <h4 class="mb-3 text-center fw-bold border-bottom pb-2">📍 Edit Address</h4>
+                <div class="address-form">
+                    {{ address_form.as_p }}
                 </div>
+                <button type="submit" class="btn btn-primary btn-sm mt-2" style="width: auto;">Update</button>
             </div>
         </div>
     </form>
@@ -67,20 +65,8 @@
     });
 
     // Real-time validation
-    document.querySelector('input[name="phone"]').addEventListener('input', function(e) {
-        // Remove any non-numeric characters
-        this.value = this.value.replace(/\D/g, '');
-        
-        // Limit to 10 digits
-        if (this.value.length > 10) {
-            this.value = this.value.slice(0, 10);
-        }
-        
-        // Visual feedback
-        if (this.value.length === 10) {
-            this.style.borderColor = '#4CAF50';
-        } else {
-            this.style.borderColor = '#ccc';
-        }
+    document.querySelector('input[name="phone"]').addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g, '').slice(0, 10);
+        this.style.borderColor = (this.value.length === 10) ? '#4CAF50' : '#ccc';
     });
 </script>
