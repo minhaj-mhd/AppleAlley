@@ -8,7 +8,7 @@
         <div class="col-2">
             <p>Home / Mobiles</p>
             <h1> {{product}}</h1>
-            <h4>${{product.price}}</h4>
+            <h4>Rs.{{product.price}}</h4>
             <form method="POST" action ={% url "addtocart"%} enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="number" name="quantity" value="1">

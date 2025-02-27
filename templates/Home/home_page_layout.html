@@ -31,17 +31,17 @@
                 </a>
                 </div>
                 <div class="col-5">
-                    <a href={% url "productbyseries" "Apple" %}>
+                    <a href={% url "productbyseries" "iPhone 15 series" %}>
 
                     <img src={% static "images/series/15.png"%}></a>
                 </div>
                 <div class="col-5">
-                    <a href={% url "productbyseries" "Google" %}>
+                    <a href={% url "productbyseries" "iPhone 14 series" %}>
 
                     <img src={% static "images/series/14.png"%}></a>
                 </div>
                 <div class="col-5">
-                    <a href={% url "productbyseries" "Vivo" %}>
+                    <a href={% url "productbyseries" "iPhone 13 Series" %}>
 
                     <img src={% static "images/series/13.png"%}></a>
                 </div>
@@ -61,13 +61,8 @@
             <div class="col-4">
                 <a href={% url "productdetails" product.id%}><img src= {{product.image.url}}></a>
                 <h4>{{product.brand}} {{product.title}}</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
+                <p style="text-decoration: line-through;">Rs.{{product.max_price}}
+
                 <p>{{product.price}}</p>
             </div>
             {%endfor%}
@@ -83,14 +78,8 @@
             <div class="col-4"  >
                 <a href={% url "productdetails" product.id%}><img src= {{product.image.url}}></a>
                 <h4>{{product.brand}} {{product.title}}</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>${{product.price}}</p>
+                <p style="text-decoration: line-through;">Rs.{{product.max_price}}
+                <p>Rs.{{product.price}}</p>
             </div>
             {%endfor%}
             
