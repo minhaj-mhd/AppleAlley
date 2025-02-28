@@ -85,6 +85,8 @@ def confirmCancelOrder(request,id):
     order = Order.objects.get(id=id)
     items = order.cart.all()
     print("cancelitems:",items)
+    for i in items:
+        print(i.IPhoneVariant)
     return render(request,"account/confirm_cancel.html",{"obj":items,"id":id})
               
 

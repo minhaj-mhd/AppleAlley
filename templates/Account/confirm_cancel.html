@@ -1,48 +1,54 @@
 {% extends "blank_layout.html" %}
-{% load static%}
-{%load order_tags%}
+{% load static %}
+{% load order_tags %}
 
-{% block header%}
-<link rel="stylesheet" href={%static "css/profile.css"%}>
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock header %}
 
-{% endblock header%}
 {% block content %}
-<div class="row">
+<div class="container mt-5">
+  <div class="row">
     <div class="order-container col-md-8">
-        <h2 class="order-title">Following items would be cancelled:</h2>
+      <h2 class=" mb-4">Following items would be cancelled:</h2>
 
-            {%for item in obj%}
-                <div class="orders-card">
-                    <img src="{{item.product.image.url}}" style="width:60px" class"order-item" />
-                     <div class"order-item" > 
-                        <h4>{{item.product.brand}}{{item.product.title}}</h4>
-                        {% if items.status == 1 %}
-                            <h5 style="color:green">Order Confirmed</h5>
-                        {% elif items.status == 2 %}
-                            <h5 style="color:green">Order on the Way</h5>
-                        {% elif items.status == 3 %}
-                            <h5 style="color:green">Order Delivered</h5>
-                        {% elif items.status == 4 %}
-                            <h5 style="color:red">Order Cancelled</h5>
-                        {% endif %}
+      {% for item in obj %}
+      <div class="card mb-3">
+        <div class="row g-0">
+          <!-- Order Image -->
+          <div class="col-md-2 d-flex align-items-center justify-content-center">
+            <img src="{{ item.IPhoneVariant.image.url }}" class="img-fluid" alt="{{ item.IPhoneVariant }}">
+          </div>
+          <!-- Order Details -->
+          <div class="col-md-7">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.IPhoneVariant }}</h5>
+              {% if item.status == 1 %}
+                <p class="card-text text-success">Order Confirmed</p>
+              {% elif item.status == 2 %}
+                <p class="card-text text-success">Order on the Way</p>
+              {% elif item.status == 3 %}
+                <p class="card-text text-success">Order Delivered</p>
+              {% elif item.status == 4 %}
+                <p class="card-text text-danger">Order Cancelled</p>
+              {% endif %}
+            </div>
+          </div>
+          <!-- Order Date, Quantity, and Total -->
+          <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+            <p class="mb-1">{{ item.date }}</p>
+            <p class="mb-1">Quantity: {{ item.quantity }}</p>
+            <p class="mb-0 fw-bold">{% multiply item.IPhoneVariant.price item.quantity %}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
 
-                    </div>
-                    <div class"order-item"><div>{{items.date}}</div>
-                        <div>
-                            <h4> Quantity: {{item.quantity}}</h4>
-
-                        </div>
-                    </div>
-                    <div class"order-item">
-                        <h4>{%multiply item.product.price item.quantity%}</h4>
-
-                    </div>
-                </div>
-                {%endfor%}
-                
-                            <a href={%url "cancel" id%} class="cancel-btn"  style="background-color:red">Cancel Order</a>
+      <a href="{% url 'cancel' id %}" class="btn btn-danger">Cancel Order</a>
+    </div>
+  </div>
+</div>
 {% endblock content %}
 
-{% block extra_scripts%}
-
-{% endblock extra_scripts%}
+{% block extra_scripts %}
+{% endblock extra_scripts %}

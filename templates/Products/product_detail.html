@@ -1,25 +1,68 @@
 {% load static %}
-<div class="small-container single-product">
-    <div class="row">
-        <div class="col-2">
-            <img src={{product.image.url}} width="100%" id="ProductImg">
+<div class="container my-5">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'products' %}">Mobiles</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ product }}</li>
+      </ol>
+    </nav>
 
+    <div class="row">
+        <!-- Product Image (without shadow) -->
+        <div class="col-lg-6 mb-4">
+            <img src="{{ product.image.url }}" class="img-fluid rounded" id="ProductImg" alt="{{ product }}">
         </div>
-        <div class="col-2">
-            <p>Home / Mobiles</p>
-            <h1> {{product}}</h1>
-            <h4>Rs.{{product.price}}</h4>
-            <form method="POST" action ={% url "addtocart"%} enctype="multipart/form-data">
+        <!-- Product Details -->
+        <div class="col-lg-6">
+            <h1 class="fw-bold">{{ product }}</h1>
+            <p class="text-muted text-decoration-line-through mb-0">Rs. {{ product.max_price }}</p>
+            <h4 class="text-success">Rs. {{ product.price }}</h4>
+            
+            <!-- Optional Product Rating -->
+            <div class="mb-3">
+                
+            </div>
+
+            <!-- Add to Cart Form -->
+            <form method="POST" action="{% url 'addtocart' %}" class="mb-3" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="number" name="quantity" value="1">
-                <input type = "hidden" name="product_id" value={{product.id}}>
-                <button type="submit" class="btn">Add To Cart</button>
+                <div class="d-flex align-items-center">
+                    <label for="quantity" class="me-2 mb-0">Qty:</label>
+                    <input type="number" name="quantity" id="quantity" value="1" min="1" style="width:50px;" class="form-control me-2">
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <button type="submit" class="btn btn-success">Add To Cart</button>
+                </div>
             </form>
             
+            <!-- Wishlist and Share Buttons -->
+            <div class="mb-4">
+                <button class="btn btn-wishlist me-2"><i class="fa fa-heart"></i> </button>
+                <button class="btn btn-outline-success"><i class="fa fa-share-alt"></i> </button>
+            </div>
 
-            <h3>Product Details <i class="fa fa-indent"></i></h3>
-            <br>
-            <p>{{product.description}}</p>
+            <!-- Product Details Tabs -->
+            <ul class="nav nav-tabs" id="productTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">
+                  Description
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="additional-tab" data-bs-toggle="tab" data-bs-target="#additional" type="button" role="tab" aria-controls="additional" aria-selected="false">
+                  Additional Details
+                </button>
+              </li>
+            </ul>
+            <div class="tab-content" id="productTabContent">
+              <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                <p class="mt-3">{{ product.description }}</p>
+              </div>
+              <div class="tab-pane fade" id="additional" role="tabpanel" aria-labelledby="additional-tab">
+                <p class="mt-3">Additional details about the product can be listed here.</p>
+              </div>
+            </div>
         </div>
     </div>
 </div>

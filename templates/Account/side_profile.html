@@ -6,11 +6,11 @@
         <div class="heading-underline"></div>
     </div>
     
-    <div class="row">
-        <!-- Profile Info (Left Side) -->
-        <div class="col-md-6 col-12 d-flex align-items-center justify-content-center mb-4 mb-md-0">
+    <div class="row align-items-start">
+        <!-- Profile Info (Column 1) -->
+        <div class="col-md-4 col-12">
             <div class="profile-box">
-                <h4 class="mb-3 text-center fw-bold border-bottom pb-2">👤 Profile Details</h4>
+                <h4 class="fw-bold mb-3">👤 Profile Details</h4>
                 <div class="profile-info mb-2">
                     <strong>First Name:</strong> <span class="text-muted">{{ customer.first_name }}</span>
                 </div>
@@ -24,22 +24,32 @@
                     <strong>Phone:</strong> <span class="text-muted">{{ customer.phone }}</span>
                 </div>
                 {% if not customer.email_verified %}
-                <div class="mt-3 text-center">
-                    <a href="{% url 'verify' %}" class="btn btn-warning btn-sm">Verify Email</a>
+                <div class="mt-3">
+                    <a href="{% url 'verify' %}" class="btn btn-warning btn-sm btn-custom">Verify Email</a>
                 </div>
                 {% endif %}
             </div>
         </div>
-
-        <!-- Address Section (Right Side) -->
-        <div class="col-md-6 col-12 d-flex align-items-center justify-content-center">
+        
+        <!-- Address Section (Column 2) -->
+        <div class="col-md-4 col-12">
             <div class="profile-box">
-                <h4 class="mb-3 text-center fw-bold border-bottom pb-2">📍 Address</h4>
-                <p class="text-muted text-center">{{ customer.address|linebreaksbr }}</p>
-                <div class="text-center">
-                    <a href="{% url 'address' procceed='false' %}" class="btn btn-primary btn-sm mt-2">Edit Details</a>
+                <h4 class="fw-bold mb-3">📍 Address</h4>
+                <p class="text-muted">{{ customer.address|linebreaksbr }}</p>
+            </div>
+        </div>
+        
+        <!-- Account Actions (Column 3) -->
+        <div class="col-md-4 col-12">
+            <div class="profile-box">
+                <h4 class="fw-bold mb-3">⚙️ Account Actions</h4>
+                <div>
+                    <a href="{% url 'address' procceed='false' %}" class="btn btn-success btn-sm btn-custom mx-1 my-1">Edit Details</a>
+                    <a href="#" class="btn btn-secondary btn-sm btn-custom mx-1 my-1">Reset Password</a>
+                    {% comment %} <a href="#" class="btn btn-danger btn-sm btn-custom mx-1 my-1">Delete Account</a> {% endcomment %}
                 </div>
             </div>
         </div>
+        
     </div>
 </div>

@@ -52,7 +52,7 @@
         {% get_featured_products 4 as featured_products %}
         {% for product in featured_products %}
         <div class="col-md-3 col-sm-6">
-            <div class="card product-card border-0 shadow-sm">
+            <div class="card product-card border-0 ">
                 <a href="{% url 'productdetails' product.id %}">
                     <img src="{{ product.image.url }}" class="card-img-top img-fluid rounded" alt="{{ product }}">
                 </a>
@@ -75,7 +75,7 @@
         {% get_latest_products 4 as latest_products %}
         {% for product in latest_products %}
         <div class="col-md-3 col-sm-6">
-            <div class="card product-card border-0 shadow-sm">
+            <div class="card product-card border-0 ">
                 <a href="{% url 'productdetails' product.id %}">
                     <img src="{{ product.image.url }}" class="card-img-top img-fluid rounded" alt="{{ product }}">
                 </a>

@@ -901,13 +901,11 @@ form a{
     color: #555;
 }
 .footer {
-    background-color: #343a40;
-    color: #f8f9fa;
+    background-color: #dee2e6;
 }
 
 .footer a {
     text-decoration: none;
-    color: #f8f9fa;
 }
 
 .footer a:hover {
@@ -918,6 +916,7 @@ form a{
     color: #087474;
     font-weight: bold;
 }
+
 
 .heading-underline {
     width: 60px;
@@ -933,4 +932,79 @@ form a{
 .product-card:hover {
     transform: scale(1.05);
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+/* Container and Spacing */
+.my-5 {
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+}
+
+/* Breadcrumb */
+.breadcrumb a {
+    text-decoration: none;
+    color: #0d6efd;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #ff523b;
+    border: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+.btn-primary:hover {
+    background-color: #563434;
+}
+
+/* Nav Tabs */
+.nav-tabs .nav-link {
+    font-size: 1rem;
+    font-weight: 500;
+}
+.nav-tabs .nav-link.active {
+    border-color: #ff523b;
+}
+
+/* Rating Icons */
+.fa-star, .fa-star-half-alt {
+    font-size: 1.2rem;
+}
+
+/* Wishlist button with pink theme */
+.btn-wishlist {
+    background-color: #ff69b4;
+    border: none;
+    color: #fff;
+}
+.btn-wishlist:hover {
+    background-color: #ff85c1;
+}
+
+/* Ensure quantity input remains compact */
+#quantity {
+    width: 50px;
+}
+
+
+/* Custom small button style */
+.btn-custom {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+/* Optional: Styling for the profile box */
+.profile-box {
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* Optional: Adjust the heading underline if needed */
+.heading-underline {
+    width: 50px;
+    height: 4px;
+    background-color: #000;
+    margin: 0 auto;
 }
