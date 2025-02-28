@@ -54,7 +54,7 @@
         <input type = "hidden" name="cart" value={{cart}}>
         <input type="hidden" name = "total" value = {{total}}>
         {%if verified%}
-        <button type="submit" style="background-color: green; color: white;width:30%;float:right" class="btn ">Procceed</button>
+        <button type="submit" class="btn btn-success btn-lg w-30 float-end">Proceed</button>
         {%else%}
         <a href={% url "verify" %} style="background-color: green; color: white;width:30%;float:right" class="btn ">Verify to Procceed</a>
         {%endif%}

@@ -27,7 +27,7 @@
     <form method = "post" action ={% url "payment"%}>
         {%csrf_token%}
         <input type = "hidden" name="amount" value={{total}}/>
-        <button type="submit" class="btn" style="background-color:green">Procceed to payment</button>
+        <button type="submit" class="btn btn-success  w-30 float-end" style="background-color:green">Procceed to payment</button>
 
     </form>
     {%else%}

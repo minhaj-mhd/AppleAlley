@@ -913,3 +913,24 @@ form a{
 .footer a:hover {
     color: #007bff;
 }
+.custom-heading {
+    font-size: 1.8rem;
+    color: #087474;
+    font-weight: bold;
+}
+
+.heading-underline {
+    width: 60px;
+    height: 3px;
+    background-color: #087474;
+    margin-top: 5px;
+}
+
+.product-card {
+    transition: all 0.3s ease-in-out;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}

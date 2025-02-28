@@ -1,91 +1,91 @@
-    {% load static %}
- {% load custom_tags %}
-    <!-- Feadtued Categories -->
+{% load static %}
+{% load custom_tags %}
 
-    <div class = "services">
-        <div class="small-container">
-            <div class="row">
-                <div class="col-3">
-                    <img src={% static "images/services/freedelivery.png" %}>
-                </div>
-                <div class="col-3">
-                    <img src={% static "images/services/support.png" %}>
-                </div>
-                <div class="col-3">
-                    <img src={% static "images/services/warranty.png" %}>
-                </div>
-            </div>
+<div class="container mt-5">
+    <!-- Services Section -->
+    <div class="row text-center py-4">
+        <div class="col-4">
+            <img src="{% static 'images/services/freedelivery.png' %}" class="img-fluid" alt="Free Delivery">
+        </div>
+        <div class="col-4">
+            <img src="{% static 'images/services/support.png' %}" class="img-fluid" alt="Support">
+        </div>
+        <div class="col-4">
+            <img src="{% static 'images/services/warranty.png' %}" class="img-fluid" alt="Warranty">
         </div>
     </div>
 
-    <div class="categories">
-        <div class="small-container">
-            <div class="text-center mb-4">
-                <h3 class="custom-heading">Shop by Series</h3>
-                <div class="heading-underline"></div>
-            </div>
-            <div class="row">
-                <div class="col-5" >
-                    <a href={% url "productbyseries" "iPhone 16 series" %}>
-                    <img src={% static "images/series/16.png" %} width="200px" >
-                </a>
-                </div>
-                <div class="col-5">
-                    <a href={% url "productbyseries" "iPhone 15 series" %}>
-
-                    <img src={% static "images/series/15.png"%}></a>
-                </div>
-                <div class="col-5">
-                    <a href={% url "productbyseries" "iPhone 14 series" %}>
-
-                    <img src={% static "images/series/14.png"%}></a>
-                </div>
-                <div class="col-5">
-                    <a href={% url "productbyseries" "iPhone 13 Series" %}>
-
-                    <img src={% static "images/series/13.png"%}></a>
-                </div>
-            </div>
+    <!-- Shop by Series -->
+    <div class="text-center mb-4">
+        <h3 class="text-uppercase fw-bold custom-heading">Shop by Series</h3>
+        <div class="heading-underline mx-auto"></div>
+    </div>
+    <div class="row text-center gy-4">
+        <div class="col-md-3 col-6">
+            <a href="{% url 'productbyseries' 'iPhone 16 series' %}">
+                <img src="{% static 'images/series/16.png' %}" class="img-fluid rounded" alt="iPhone 16">
+            </a>
+        </div>
+        <div class="col-md-3 col-6">
+            <a href="{% url 'productbyseries' 'iPhone 15 series' %}">
+                <img src="{% static 'images/series/15.png' %}" class="img-fluid rounded" alt="iPhone 15">
+            </a>
+        </div>
+        <div class="col-md-3 col-6">
+            <a href="{% url 'productbyseries' 'iPhone 14 series' %}">
+                <img src="{% static 'images/series/14.png' %}" class="img-fluid rounded" alt="iPhone 14">
+            </a>
+        </div>
+        <div class="col-md-3 col-6">
+            <a href="{% url 'productbyseries' 'iPhone 13 series' %}">
+                <img src="{% static 'images/series/13.png' %}" class="img-fluid rounded" alt="iPhone 13">
+            </a>
         </div>
     </div>
 
     <!-- Featured Products -->
-
-    <div class="small-container">
-        <div class="text-center mb-4">
-            <h3 class="custom-heading">Featured Products</h3>
-            <div class="heading-underline"></div>
-        </div>        <div class="row">
-            {% get_featured_products 4 as featured_products%}
-            {% for product in featured_products%}
-            <div class="col-4">
-                <a href={% url "productdetails" product.id%}><img src= {{product.image.url}}></a>
-                <h4>{{product}}</h4>
-                <p style="text-decoration: line-through;">Rs.{{product.max_price}}
-
-                <p>{{product.price}}</p>
+    <div class="text-center my-5">
+        <h3 class="text-uppercase fw-bold custom-heading">Featured Products</h3>
+        <div class="heading-underline mx-auto"></div>
+    </div>
+    <div class="row gy-4">
+        {% get_featured_products 4 as featured_products %}
+        {% for product in featured_products %}
+        <div class="col-md-3 col-sm-6">
+            <div class="card product-card border-0 shadow-sm">
+                <a href="{% url 'productdetails' product.id %}">
+                    <img src="{{ product.image.url }}" class="card-img-top img-fluid rounded" alt="{{ product }}">
+                </a>
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ product }}</h5>
+                    <p class="text-muted text-decoration-line-through">Rs.{{ product.max_price }}</p>
+                    <p class="fw-bold text-success">Rs.{{ product.price }}</p>
+                </div>
             </div>
-            {%endfor%}
-
-            
         </div>
-        <div class="text-center mb-4">
-            <h3 class="custom-heading">Latest Products</h3>
-            <div class="heading-underline"></div>
-        </div>        <div class="row">
-            {%get_latest_products 4 as latest_products%}
-            {% for product in latest_products%}
-            <div class="col-4"  >
-                <a href={% url "productdetails" product.id%}><img src= {{product.image.url}}></a>
-                <h4>{{product.brand}} {{product.title}}</h4>
-                <p style="text-decoration: line-through;">Rs.{{product.max_price}}
-                <p>Rs.{{product.price}}</p>
-            </div>
-            {%endfor%}
-            
-        </div>
+        {% endfor %}
     </div>
 
-
-
-
+    <!-- Latest Products -->
+    <div class="text-center my-5">
+        <h3 class="text-uppercase fw-bold custom-heading">Latest Products</h3>
+        <div class="heading-underline mx-auto"></div>
+    </div>
+    <div class="row gy-4">
+        {% get_latest_products 4 as latest_products %}
+        {% for product in latest_products %}
+        <div class="col-md-3 col-sm-6">
+            <div class="card product-card border-0 shadow-sm">
+                <a href="{% url 'productdetails' product.id %}">
+                    <img src="{{ product.image.url }}" class="card-img-top img-fluid rounded" alt="{{ product }}">
+                </a>
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ product }}</h5>
+                    <p class="text-muted text-decoration-line-through">Rs.{{ product.max_price }}</p>
+                    <p class="fw-bold text-success">Rs.{{ product.price }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
