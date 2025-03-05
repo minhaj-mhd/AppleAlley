@@ -17,14 +17,14 @@ class Order(models.Model):
                         (ORDER_DELIVERED,"ORDER_DELIVERED"),
                         (ORDER_REJECTED,"ORDER_REJECTED")
     )
-    order_status = models.IntegerField(STATUS_CHOICE,default= CART_STAGE)
+    order_status = models.IntegerField(STATUS_CHOICE,default=CART_STAGE)
     owner = models.ForeignKey(Customer,on_delete=models.SET_NULL,null=True,related_name="order")
-    deleted_status = models.IntegerField(choices=DELETE_CHOICES,default=0 )
+    deleted_status = models.IntegerField(choices=DELETE_CHOICES,default=1 )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return "order-"+self.owner.name+"  "+str(self.id)
+        return "order-"+self.owner.name+str(self.id)
 
 class OrderItem(models.Model):
     IPhoneVariant = models.ForeignKey(IPhoneVariant,on_delete=models.CASCADE,related_name="order_item",null=True)

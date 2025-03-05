@@ -121,22 +121,36 @@ def Address(request, procceed):
 
     if user.is_authenticated:
         customer = user.customer
+        address_form = None  # Default to None if no address exists
 
         if request.method == "POST":
             customer_form = CustomerForm(request.POST, instance=customer)
-            address_form = AddressForm(request.POST, instance=customer.address)
 
-            if customer_form.is_valid() and address_form.is_valid():
+            #  Check if customer has an address
+            if customer.address:
+                address_form = AddressForm(request.POST, instance=customer.address)
+            else:
+                address_form = AddressForm(request.POST)  # New address if needed
+
+            if customer_form.is_valid() and (not address_form or address_form.is_valid()):
                 customer_form.save()
-                address_form.save()
-                if procceed == 'true':
-                    return redirect("confirmorder")
-                else:
-                    return redirect("profile")
+
+                #  Save address only if form exists and is valid
+                if address_form:
+                    address = address_form.save(commit=False)  # Don't save yet
+                    if not customer.address:
+                        customer.address = address  # Link address to customer
+                    address.save()
+                    customer.save()  # Save customer with updated address
+
+                return redirect("confirmorder" if procceed == 'true' else "profile")
 
         else:
             customer_form = CustomerForm(instance=customer)
-            address_form = AddressForm(instance=customer.address)
+            if customer.address:
+                address_form = AddressForm(instance=customer.address)
+            else:
+                address_form = AddressForm()  # Empty form if no address
 
         return render(request, "Account/edit_address_layout.html", {
             "customer_form": customer_form,

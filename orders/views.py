@@ -95,18 +95,15 @@ def confirmOrder(request):
         user = request.user
         customer=user.customer
         address = customer.address
-        print(address)
         cart_obj=Order.objects.get(owner=customer,order_status=Order.CART_STAGE)
-        print(cart_obj)
         orders=cart_obj.cart.all()
-        print(orders)
         total = 0
         for obj in orders:
             IPhoneVariant = obj.IPhoneVariant
             print(IPhoneVariant.price)
             total = total+int(IPhoneVariant.price)*int(obj.quantity)
 
-        total=total+total*0.18
+        total=total
         context={
             "address":address,
             "total":total,
@@ -154,10 +151,15 @@ def payment_success(request):
         if generated_signature == razorpay_signature:
             # Payment is successful
             user=request.user
+            print("user",user)
             customer=user.customer
+            print("customer",customer)
             order=Order.objects.get(owner=customer,order_status=Order.CART_STAGE)
+            print(order)
             if order:
+
                 order.order_status=Order.ORDER_CONFIRMED
+                print("status",order.order_status)
                 order.save()
             return JsonResponse({"message": "Payment verified successfully!"})
             
