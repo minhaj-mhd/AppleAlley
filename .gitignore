@@ -1,2 +1,49 @@
-aenv
+# Ignore the virtual environment folder
+aenv/
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore Django secret key and environment variables
 .env
+*.env
+
+# Ignore database files
+db.sqlite3
+db.sqlite3-journal
+
+# Ignore compiled Python files
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore logs and temporary files
+*.log
+logs/
+*.bak
+*.swp
+
+
+# Ignore IDE/editor configuration files
+.vscode/
+
+
+# Ignore dependency files
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Ignore Celery-related files
+celerybeat-schedule
+
+# Ignore Redis dump files
+dump.rdb
+
+# Ignore coverage and test reports
+.coverage
+*.cover
+.hypothesis/
+
+# Ignore Django migration cache
+**/migrations/__pycache__/
