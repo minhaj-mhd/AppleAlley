@@ -24,7 +24,7 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return "order-"+self.owner.name+str(self.id)
+        return "order-"+str(self.id)
 
 class OrderItem(models.Model):
     IPhoneVariant = models.ForeignKey(IPhoneVariant,on_delete=models.CASCADE,related_name="order_item",null=True)
