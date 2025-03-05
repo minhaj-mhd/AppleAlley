@@ -129,9 +129,9 @@ def payment(request):
             "order_id": order["id"],
             "amount": amount,
         }
-        return render(request, "cart/payment.html", context)
+        return render(request, "Cart/payment.html", context)
 
-    return render(request, "cart/payment.html")
+    return render(request, "Cart/payment.html")
     
 @csrf_exempt
 def payment_success(request):
