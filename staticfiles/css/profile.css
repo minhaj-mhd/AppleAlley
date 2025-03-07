@@ -1,0 +1,272 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start; /* Ensures content aligns to the top */
+}
+
+.col-1 {
+  flex: 2; /* Increased from 1.5 to 2 to allocate more space */
+  min-width: 300px; /* Adjusted minimum width */
+}
+
+.col-3 {
+  flex: 2.5; /* Adjusted to maintain the total flex ratio */
+  min-width: 300px;
+}
+
+.orders-card {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 10px;
+  width: 100%;
+  padding: 10px; /* Adds space around the card contents */
+  border-bottom: 1px solid #ccc; /* Optional: Adds a separator between orders */
+}
+
+.profile-card {
+  /* Takes up 1/4th of the screen width */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px; /* Optional: Caps the max width */
+  text-align: center;
+  margin-left: 30px;
+  margin-bottom: 100px;
+  padding-bottom: 40px;
+  position: static;
+  margin-top: 10px;
+}
+
+.address-card {
+  text-align: center;
+  margin: 10px auto; /* Center the card horizontally */
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row; /* Horizontal layout by default */
+  max-width: 75%; /* Takes 3/4th of the screen width on desktop */
+}
+
+.profile-side, .address-side {
+  flex: 1; /* Allows each side to take equal space */
+}
+
+.title {
+  color: grey;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.order-container {
+  flex-grow: 1; /* Takes the remaining space (3/4ths of the screen) */
+  margin-left: 20px;
+  width: 70%; /* Use percentages for a responsive layout */
+  flex-direction: column;
+  padding: 30px;
+}
+
+.cancel-btn{
+  display: inline-block;
+  background: #ff523b;
+  color: white;
+  padding: 5px 10px;
+  margin: 10px 0;
+  border-radius: 150px;
+  transition: background 0.5s;
+}
+.cancel-btn:hover{
+  background: #563434;
+}
+
+.order-title {
+  color: grey;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.order-item{
+  text-align: left;
+}
+.product{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.title{
+  text-align: center;
+  margin: 0 auto 80px;
+  position: relative;
+  line-height: 60px;
+}
+.profile-title{
+  text-align: center;
+  margin: 0 auto 20px;
+  position: relative;
+  line-height: 20px;
+  background-color: #ffffff;
+  width: 30%;
+  font-weight: bold;
+  color: #087474;
+  align-items: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #ffffff;
+  width: 30%;
+  font-weight: bold;
+  color: #087474;
+}
+td{
+  text-align: center;
+}
+
+.verify-btn {
+  display: inline-block;
+  background-color: green;
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.verify-btn:hover {
+  background-color: darkgreen;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 700px) {
+  .order-container {
+    width: 100%; /* On smaller screens, make it full width */
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .address-card {
+    flex-direction: column; /* Stack vertically on mobile */
+    max-width: 90%; /* Adjust width for mobile */
+    padding: 20px;
+    margin: 20px auto; /* Center with smaller margin on mobile */
+  }
+
+  .profile-image {
+      width: 60%; /* Larger profile image on mobile */
+  }
+
+  .btn {
+      width: 80%; /* Full-width button on mobile */
+  }
+}
+
+/* Profile Container Styles */
+.profile-container {
+    max-width: 100%;
+    text-align: left;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.profile-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #087474;
+    margin-bottom: 15px;
+}
+
+.profile-info {
+    margin-bottom: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.profile-info span {
+    display: inline-block;
+    font-weight: bold;
+    color: #555;
+    text-align: right;
+    font-size: 14px; /* Reduced font size */
+}
+
+.profile-info div {
+    margin-left: 10px;
+    flex-grow: 1;
+    font-size: 14px; /* Reduced font size */
+}
+
+.address-title {
+    font-size: 16px; /* Reduced font size */
+    font-weight: bold;
+    color: #087474;
+    margin-bottom: 10px;
+}
+
+.address-text {
+    color: #555;
+    line-height: 1.5;
+    font-size: 14px; /* Reduced font size */
+}
+
+.address-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.address-form p {
+    flex: 1 1 45%;
+    margin: 0;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #087474;
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #065a5a;
+}
+
+/* Responsive Design */
+@media (max-width: 700px) {
+    .col-1, .col-3 {
+        flex: 1 1 100%;
+    }
+
+    .profile-container {
+        width: 90%;
+        padding: 10px; /* Reduced padding for mobile */
+    }
+
+    .profile-title {
+        font-size: 14px; /* Further reduced font size */
+    }
+
+    .profile-info span, .profile-info div, .address-text {
+        font-size: 12px; /* Further reduced font size for mobile */
+    }
+
+    .verify-btn, .btn {
+        width: 100%;
+        padding: 6px 10px; /* Reduced padding for buttons */
+    }
+}
