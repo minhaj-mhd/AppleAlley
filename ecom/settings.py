@@ -131,7 +131,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR/ "static"
 ]
-STATIC_ROOT = '/var/www/gulf2/staticfiles/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = 'images/'
 MEDIA_ROOT = os.path.join( BASE_DIR, "media/")
