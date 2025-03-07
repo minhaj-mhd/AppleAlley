@@ -19,7 +19,11 @@
             <h1 class="fw-bold">{{ product }}</h1>
             <p class="text-muted text-decoration-line-through mb-0">Rs. {{ product.max_price }}</p>
             <h4 class="text-success">Rs. {{ product.price }}</h4>
-            
+            {% if product.stock_quantity < 1 %}
+                <p class="text-danger">Out of Stock</p>
+            {% else %}
+                <p class="text-success">In Stock</p>
+            {% endif %}
             <!-- Optional Product Rating -->
             <div class="mb-3">
                 
@@ -32,7 +36,11 @@
                     <label for="quantity" class="me-2 mb-0">Qty:</label>
                     <input type="number" name="quantity" id="quantity" value="1" min="1" style="width:50px;" class="form-control me-2">
                     <input type="hidden" name="product_id" value="{{ product.id }}">
-                    <button type="submit" class="btn btn-success">Add To Cart</button>
+                    {% if product.stock_quantity < 1 %}
+                      <button class="btn btn-danger" disabled>Add to Cart</button>
+                    {% else %}
+                      <button type="submit" class="btn btn-success">Add To Cart</button>
+                    {% endif %}
                 </div>
             </form>
             
