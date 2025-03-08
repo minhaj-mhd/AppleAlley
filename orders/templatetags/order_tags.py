@@ -22,4 +22,4 @@ def tax(subtotal):
 
 @register.simple_tag        
 def getTotal(subTotal,tax):
-    return float(subTotal)+float(tax)
+    return float(subTotal)

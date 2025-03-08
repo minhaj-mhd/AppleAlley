@@ -35,11 +35,10 @@
     <div class="total-price">
         <table>
             <tbody><tr>
-                <td>Subtotal</td>
-                <td>{%getSubTotal cart as Subtotal%}{{Subtotal}}</td>
+                <td>{%getSubTotal cart as Subtotal%}</td>
             </tr>
             <tr>
-                <td>Tax</td>
+                <td>GST</td>
                 <td>{%tax Subtotal as tax%}{{tax}}</td>
             </tr>
             <tr>
